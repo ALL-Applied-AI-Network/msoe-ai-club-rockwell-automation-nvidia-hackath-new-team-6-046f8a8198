@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 
 
-BUNDLE_SCHEMA = "vial-inspection-bundle-1"
+BUNDLE_SCHEMA = "vial-inspection-bundle-2"
 COMPONENTS = {
     "position_metadata": "position/model.json",
     "position_stage1": "position/stage1.yml",
@@ -52,7 +52,11 @@ def package_bundle(position_model, tray_model, threshold_profile, calibration,
     position_metadata = read_schema(position_model/"model.json", "vial-two-stage-1")
     threshold_metadata = read_schema(
         threshold_profile, "vial-two-stage-threshold-1")
-    tray_metadata = read_schema(tray_model/"metrics.json", "vial-tray-classifier-1")
+    tray_metadata = read_schema(tray_model/"metrics.json", "vial-tray-classifier-2")
+    tray_gate = tray_metadata.get("confidence_gate")
+    if (not isinstance(tray_gate, dict) or
+            tray_gate.get("schema_version") != "vial-tray-confidence-gate-1"):
+        raise ValueError("tray model has no supported confidence gate")
     try:
         calibration_metadata = json.loads(calibration.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -117,6 +121,9 @@ def package_bundle(position_model, tray_model, threshold_profile, calibration,
                 "defect_threshold": float(threshold_metadata["defect_threshold"]),
                 "tray_feature_set": tray_metadata["feature_set"],
                 "tray_feature_count": int(tray_metadata["feature_count"]),
+                "complete_margin_threshold": float(
+                    tray_gate["complete_margin_threshold"]),
+                "complete_margin_sign": float(tray_gate["complete_margin_sign"]),
                 "calibration_schema": calibration_metadata.get("schema_version"),
             },
             "warning": (

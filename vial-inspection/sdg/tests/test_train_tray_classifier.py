@@ -26,3 +26,16 @@ def test_metrics_balances_rare_complete_class():
     result = MODULE.metrics([0, 1, 1, 1], [0, 0, 1, 1])
     assert result["accuracy"] == 0.75
     assert np.isclose(result["balanced_accuracy"], (1.0+2/3)/2)
+
+
+def test_gate_threshold_has_zero_validation_false_accepts():
+    actual = np.asarray([0, 0, 1, 1])
+    margins = np.asarray([0.8, 0.05, 0.1, -0.2])
+    base = np.asarray([0, 0, 0, 1])
+
+    threshold = MODULE.select_complete_margin_threshold(actual, margins)
+    gated = MODULE.gated_predictions(base, margins, threshold)
+
+    assert threshold > 0.1
+    np.testing.assert_array_equal(gated, [0, 1, 1, 1])
+    assert not np.any((actual == 1) & (gated == 0))

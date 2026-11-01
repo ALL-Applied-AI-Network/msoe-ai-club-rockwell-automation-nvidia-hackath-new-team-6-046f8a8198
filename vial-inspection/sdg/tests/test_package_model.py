@@ -32,9 +32,14 @@ def build_inputs(tmp_path):
     (position/"stage1.yml").write_bytes(b"gate")
     (position/"stage2.yml").write_bytes(b"defects")
     write_json(tray/"metrics.json", {
-        "schema_version": "vial-tray-classifier-1",
+        "schema_version": "vial-tray-classifier-2",
         "feature_set": "distribution",
         "feature_count": 47,
+        "confidence_gate": {
+            "schema_version": "vial-tray-confidence-gate-1",
+            "complete_margin_sign": 1.0,
+            "complete_margin_threshold": 0.4,
+        },
     })
     (tray/"model.yml").write_bytes(b"tray")
     (tray/"scaler.npz").write_bytes(b"scale")

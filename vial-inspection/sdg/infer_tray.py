@@ -117,6 +117,13 @@ def tray_verdict(groups):
     return "unresolved"
 
 
+def confidence_gated_verdict(model_verdict, complete_margin, threshold):
+    """Only accept complete orders that clear the calibrated safety margin."""
+    if model_verdict != "complete_order":
+        return model_verdict
+    return "complete_order" if complete_margin >= threshold else "unresolved"
+
+
 def render_annotated(image, result, destination):
     """Render all mapped positions and both tray verdicts on a source image."""
     canvas = image.copy()
@@ -143,7 +150,12 @@ def render_annotated(image, result, destination):
     cv2.putText(canvas, f"{result['filename']}  |  MODEL: {model_verdict}",
                 (20, 34), cv2.FONT_HERSHEY_SIMPLEX, 0.78,
                 (255, 255, 255), 2, cv2.LINE_AA)
-    cv2.putText(canvas, f"Rules: {rule_verdict}  |  Calibration: {profile}",
+    gate = result.get("tray_confidence_gate")
+    gate_text = ""
+    if gate is not None:
+        gate_text = (f"  |  Gate: {gate['complete_margin']:.3f} / "
+                     f"{gate['complete_margin_threshold']:.3f}")
+    cv2.putText(canvas, f"Rules: {rule_verdict}  |  Calibration: {profile}{gate_text}",
                 (20, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.58,
                 (225, 225, 225), 1, cv2.LINE_AA)
     x = 20
@@ -177,6 +189,16 @@ def write_html_report(results, destination):
         visible = result["groups"]["good"].get("visible_defect_positions", [])
         defect_text = ", ".join(escape(str(value)) for value in visible) or "none"
         image_path = quote(result["annotated_image"].replace("\\", "/"))
+        gate = result.get("tray_confidence_gate")
+        gate_html = ""
+        if gate is not None:
+            gate_html = (
+                f' &nbsp; <strong>Base model:</strong> '
+                f'{escape(result["tray_model_verdict"].replace("_", " "))}'
+                f' &nbsp; <strong>Complete margin:</strong> '
+                f'{gate["complete_margin"]:.3f} / '
+                f'{gate["complete_margin_threshold"]:.3f}'
+            )
         cards.append(f"""
         <article class="tray-card">
           <div class="card-heading">
@@ -184,7 +206,8 @@ def write_html_report(results, destination):
             <span class="verdict {css_verdict}">{escape(verdict.replace('_', ' '))}</span>
           </div>
           <p><strong>Inspection rules:</strong> {escape(result['rule_tray_verdict'].replace('_', ' '))}
-             &nbsp; <strong>Calibration:</strong> {escape(str(result['alignment']['profile']))}</p>
+             &nbsp; <strong>Calibration:</strong> {escape(str(result['alignment']['profile']))}
+             {gate_html}</p>
           <a href="{image_path}"><img src="{image_path}" alt="Annotated {escape(result['filename'])}"></a>
           <div class="chips">{chips}</div>
           <p><strong>Good-tray visible defect positions:</strong> {defect_text}</p>
@@ -287,11 +310,15 @@ def main():
     predictor = load_predictor(args.model, threshold)
     if predictor["kind"] != "two_stage":
         parser.error("model must be a two-stage model directory")
-    tray_model = tray_scaler = tray_metadata = None
+    tray_model = tray_scaler = tray_metadata = tray_gate = None
     if args.tray_model is not None:
         tray_metadata = json.loads((args.tray_model/"metrics.json").read_text())
-        if tray_metadata.get("schema_version") != "vial-tray-classifier-1":
+        if tray_metadata.get("schema_version") != "vial-tray-classifier-2":
             parser.error("unsupported tray classifier")
+        tray_gate = tray_metadata.get("confidence_gate")
+        if (not isinstance(tray_gate, dict) or
+                tray_gate.get("schema_version") != "vial-tray-confidence-gate-1"):
+            parser.error("tray classifier has no supported confidence gate")
         tray_model = cv2.ml.SVM_load(str(args.tray_model/"model.yml"))
         with np.load(args.tray_model/"scaler.npz") as values:
             tray_scaler = (values["mean"], values["std"])
@@ -348,9 +375,25 @@ def main():
                                                     result["alignment"]["profile"],
                                                     tray_metadata["feature_set"])
                 mean, std = tray_scaler
-                _, tray_prediction = tray_model.predict(
-                    ((tray_features-mean)/std).reshape(1, -1).astype(np.float32))
-                result["tray_verdict"] = VERDICTS[int(tray_prediction[0, 0])]
+                scaled_tray = ((tray_features-mean)/std).reshape(1, -1).astype(np.float32)
+                _, tray_prediction = tray_model.predict(scaled_tray)
+                _, raw_margin = tray_model.predict(
+                    scaled_tray, flags=cv2.ml.STAT_MODEL_RAW_OUTPUT)
+                model_verdict = VERDICTS[int(tray_prediction[0, 0])]
+                complete_margin = (float(raw_margin[0, 0]) *
+                                   float(tray_gate["complete_margin_sign"]))
+                complete_threshold = float(tray_gate["complete_margin_threshold"])
+                result["tray_model_verdict"] = model_verdict
+                result["tray_verdict"] = confidence_gated_verdict(
+                    model_verdict, complete_margin, complete_threshold)
+                result["tray_confidence_gate"] = {
+                    "schema_version": tray_gate["schema_version"],
+                    "complete_margin": round(complete_margin, 8),
+                    "complete_margin_threshold": complete_threshold,
+                    "accepted_complete": result["tray_verdict"] == "complete_order",
+                    "low_confidence_action": "unresolved",
+                    "selected_on": tray_gate["selected_on"],
+                }
                 result["tray_model"] = {
                     "feature_set": tray_metadata["feature_set"],
                     "model_sha256": sha256(args.tray_model/"model.yml"),
@@ -376,7 +419,10 @@ def main():
             results.append(result)
             counts = Counter(slot["class"] for slot in result["slots"])
             summary_rows.append({"filename": path.name, "tray_verdict": result["tray_verdict"],
+                                 "tray_model_verdict": result.get("tray_model_verdict"),
                                  "rule_tray_verdict": result["rule_tray_verdict"],
+                                 "complete_margin": result.get("tray_confidence_gate", {}).get("complete_margin"),
+                                 "complete_margin_threshold": result.get("tray_confidence_gate", {}).get("complete_margin_threshold"),
                                  "good_complete_order": result["groups"]["good"]["findings"]["complete_order"],
                                  "good_missing_vial": result["groups"]["good"]["findings"]["missing_vial"],
                                  "good_bad_as_good": result["groups"]["good"]["findings"]["bad_misclassified_as_good"],

@@ -142,16 +142,27 @@ A tray classifier was trained from the distribution of all 30 good-position
 gate scores, score quantiles and summary statistics, and predicted defect-type
 counts. The selected version deliberately excludes ordered slot identity and
 calibration-profile identity. An RBF SVM (`C=0.1`, `gamma=0.01`) was selected
-on Validation and then retrained on Training plus Validation.
+on Validation. The saved model remains fit on Training only so Validation can
+calibrate a confidence gate without contaminating the model it evaluates.
 
-Testing results were 95.7% accuracy and 97.7% balanced accuracy: all four
-complete trays were accepted, and 63 of 66 incomplete trays were rejected. The
-three false accepts were `tray_000063.jpg`, `tray_000092.jpg`, and
-`tray_000194.jpg`.
+Before confidence gating, Testing results were 94.3% accuracy and 97.0%
+balanced accuracy: all four complete trays were classified as complete, but
+four of 66 incomplete trays were false accepts. A complete-order margin gate
+was then selected exclusively on Validation. Its `0.809390` threshold admits
+no incomplete Validation tray; lower-confidence nominal-complete decisions
+become `unresolved` rather than being promoted or silently rejected.
+
+On the Testing regression, the gate produced zero false accepts, one accepted
+complete tray, 62 incomplete decisions, and seven unresolved decisions. Three
+of the unresolved trays were genuinely complete. This is a deliberate
+fail-safe tradeoff, not an accuracy improvement: uncertain trays must remain on
+the reject/review path until more complete-order calibration data are available.
 
 These results remain provisional. Only 21 complete trays exist, and neighboring
 frames from the complete-order acquisition run occur across the predefined
 splits. The distribution-only ablation reduces direct view/position leakage,
-but a genuinely independent acquisition is still required before deployment.
+but only two complete trays are available to calibrate the Validation gate and
+neither clears the zero-false-accept threshold. A genuinely independent
+acquisition is still required before deployment.
 The selected configuration and caveat are versioned in
 `tray_classifier_profile.json`.

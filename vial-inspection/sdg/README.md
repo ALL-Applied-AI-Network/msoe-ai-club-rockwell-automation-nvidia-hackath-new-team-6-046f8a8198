@@ -194,6 +194,15 @@ python train_tray_classifier.py \
 calibration-profile identity to reduce acquisition-sequence leakage. Use
 `--feature-set full` only as an explicitly labeled ablation.
 
+The saved classifier remains trained on `Training`; `Validation` selects both
+the SVM configuration and a complete-order confidence threshold. A nominal
+complete prediction below that threshold becomes `unresolved`, which must be
+routed to reject/review rather than accepted. The selected gate targets zero
+Validation false accepts. With only two complete Validation trays this is
+intentionally conservative, so coverage must be recalibrated after collecting
+more independent complete orders. The gate, orientation, threshold, and audit
+metrics are stored in `metrics.json` and copied into the verified bundle.
+
 ## Check the real-image domain gap
 
 `evaluate_real.py` applies the synthetic-trained model to calibrated crops from

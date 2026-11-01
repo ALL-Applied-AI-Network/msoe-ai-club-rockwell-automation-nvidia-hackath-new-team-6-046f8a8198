@@ -1,5 +1,5 @@
 {
-  "schema_version": "vial-tray-classifier-profile-1",
+  "schema_version": "vial-tray-classifier-profile-2",
   "feature_set": "distribution",
   "feature_count": 47,
   "selected_config": {
@@ -13,16 +13,32 @@
     "complete_order_recall": 0.5,
     "incomplete_order_recall": 0.9090909090909091
   },
-  "testing": {
-    "accuracy": 0.9571428571428572,
-    "balanced_accuracy": 0.9772727272727273,
-    "complete_order_recall": 1.0,
-    "incomplete_order_recall": 0.9545454545454546
+  "training_policy": "Model fit on Training only; Validation selected configuration and confidence gate; Testing used for regression evaluation only.",
+  "confidence_gate": {
+    "schema_version": "vial-tray-confidence-gate-1",
+    "complete_margin_sign": 1.0,
+    "complete_margin_threshold": 0.8093900084495546,
+    "selected_on": "Validation",
+    "validation_false_accepts": 0,
+    "validation_complete_accepted": 0,
+    "testing_false_accepts": 0,
+    "testing_complete_accepted": 1,
+    "testing_unresolved": 7
   },
-  "testing_false_accepts": [
+  "testing_before_gate": {
+    "accuracy": 0.9428571428571428,
+    "balanced_accuracy": 0.9696969696969697,
+    "complete_order_recall": 1.0,
+    "incomplete_order_recall": 0.9393939393939394
+  },
+  "testing_unresolved": [
     "tray_000063.jpg",
     "tray_000092.jpg",
-    "tray_000194.jpg"
+    "tray_000108.jpg",
+    "tray_000109.jpg",
+    "tray_000117.jpg",
+    "tray_000194.jpg",
+    "tray_000200.jpg"
   ],
-  "warning": "Only 21 complete-order trays are supplied, with neighboring acquisition frames across predefined splits. Treat Testing metrics as provisional."
+  "warning": "The zero-false-accept Validation gate accepts neither of the two Validation complete trays. It is fail-safe but has unproven complete-order coverage; collect independent complete trays before deployment."
 }

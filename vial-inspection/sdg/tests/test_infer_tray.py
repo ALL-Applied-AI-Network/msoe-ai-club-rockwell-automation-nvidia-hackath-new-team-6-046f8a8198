@@ -17,6 +17,12 @@ def test_tray_verdict_preserves_three_valued_rule():
     assert MODULE.tray_verdict({"good": {"findings": {"complete_order": None}}}) == "unresolved"
 
 
+def test_confidence_gate_never_promotes_incomplete_and_rejects_weak_complete():
+    assert MODULE.confidence_gated_verdict("incomplete_order", 9.0, 0.4) == "incomplete_order"
+    assert MODULE.confidence_gated_verdict("complete_order", 0.39, 0.4) == "unresolved"
+    assert MODULE.confidence_gated_verdict("complete_order", 0.40, 0.4) == "complete_order"
+
+
 def sample_result(filename="tray.jpg"):
     return {
         "filename": filename,
