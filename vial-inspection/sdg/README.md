@@ -143,10 +143,12 @@ python infer_tray.py \
   --output output/inference-demo-v1
 ```
 
-The command exports `results.json`, a position-level CSV, and a tray summary
-CSV. When `--tray-model` is present, both the learned tray verdict and the
-conservative inspection-rule verdict are retained. Scrap routing is
-intentionally left unresolved unless an upstream
+The command exports `results.json`, a position-level CSV, a tray summary CSV,
+color-coded images in `annotated/`, and an offline `report.html` suitable for
+the demo. Pass `--no-visual-report` for headless batch runs that only need
+machine-readable results. When `--tray-model` is present, both the learned tray
+verdict and the conservative inspection-rule verdict are retained. Scrap
+routing is intentionally left unresolved unless an upstream
 position-level verdict is available; a visually passing scrap vial alone does
 not prove a routing error.
 

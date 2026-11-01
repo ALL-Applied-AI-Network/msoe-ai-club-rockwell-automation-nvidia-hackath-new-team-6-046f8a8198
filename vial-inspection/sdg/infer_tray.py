@@ -4,10 +4,12 @@ import argparse
 from collections import Counter
 import csv
 import hashlib
+from html import escape
 import importlib.util
 import json
 from pathlib import Path
 import sys
+from urllib.parse import quote
 
 import cv2
 import numpy as np
@@ -17,6 +19,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from evaluate_real_dataset import CLASSES, extract_feature, load_predictor, predict
 from package_model import BUNDLE_SCHEMA, COMPONENTS
 from train_tray_classifier import VERDICTS, tray_feature_vector
+
+
+CLASS_COLORS = {
+    "pass": (70, 190, 70),
+    "missing_cap": (45, 45, 230),
+    "crooked_cap": (0, 165, 255),
+    "damaged_vial": (190, 70, 190),
+    "no_vial": (220, 140, 30),
+}
+CLASS_SHORT = {
+    "pass": "P",
+    "missing_cap": "MC",
+    "crooked_cap": "CC",
+    "damaged_vial": "DV",
+    "no_vial": "NV",
+}
 
 
 def sha256(path):
@@ -99,6 +117,128 @@ def tray_verdict(groups):
     return "unresolved"
 
 
+def render_annotated(image, result, destination):
+    """Render all mapped positions and both tray verdicts on a source image."""
+    canvas = image.copy()
+    height, width = canvas.shape[:2]
+    for slot in result["slots"]:
+        label = slot.get("class", "no_vial")
+        color = CLASS_COLORS.get(label, (180, 180, 180))
+        left, top, right, bottom = (int(value) for value in slot["bbox"])
+        thickness = 2 if label == "pass" else 3
+        cv2.rectangle(canvas, (left, top), (right, bottom), color, thickness)
+        text = f"{slot['id']}:{CLASS_SHORT.get(label, '?')}"
+        origin = (left, max(14, top-5))
+        cv2.putText(canvas, text, origin, cv2.FONT_HERSHEY_SIMPLEX,
+                    0.42, (0, 0, 0), 3, cv2.LINE_AA)
+        cv2.putText(canvas, text, origin, cv2.FONT_HERSHEY_SIMPLEX,
+                    0.42, color, 1, cv2.LINE_AA)
+
+    overlay = canvas.copy()
+    cv2.rectangle(overlay, (0, 0), (width, min(height, 108)), (0, 0, 0), -1)
+    cv2.addWeighted(overlay, 0.72, canvas, 0.28, 0, canvas)
+    model_verdict = result.get("tray_verdict", "unresolved").replace("_", " ").upper()
+    rule_verdict = result.get("rule_tray_verdict", "unresolved").replace("_", " ")
+    profile = result.get("alignment", {}).get("profile", "unknown")
+    cv2.putText(canvas, f"{result['filename']}  |  MODEL: {model_verdict}",
+                (20, 34), cv2.FONT_HERSHEY_SIMPLEX, 0.78,
+                (255, 255, 255), 2, cv2.LINE_AA)
+    cv2.putText(canvas, f"Rules: {rule_verdict}  |  Calibration: {profile}",
+                (20, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.58,
+                (225, 225, 225), 1, cv2.LINE_AA)
+    x = 20
+    for label in CLASSES:
+        color = CLASS_COLORS[label]
+        cv2.rectangle(canvas, (x, 80), (x+16, 96), color, -1)
+        text = label.replace("_", " ")
+        cv2.putText(canvas, text, (x+22, 94), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.42, (235, 235, 235), 1, cv2.LINE_AA)
+        x += 36 + int(cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX,
+                                     0.42, 1)[0][0])
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if not cv2.imwrite(str(destination), canvas,
+                       [cv2.IMWRITE_JPEG_QUALITY, 92]):
+        raise OSError(f"failed to write annotated image: {destination}")
+
+
+def write_html_report(results, destination):
+    """Write a portable, dependency-free visual summary of inference results."""
+    verdict_counts = Counter(result["tray_verdict"] for result in results)
+    cards = []
+    for result in results:
+        verdict = result["tray_verdict"]
+        css_verdict = verdict if verdict in VERDICTS else "unresolved"
+        counts = Counter(slot["class"] for slot in result["slots"])
+        chips = "".join(
+            f'<span class="chip {escape(name)}">{escape(name.replace("_", " "))}: '
+            f'{counts[name]}</span>' for name in CLASSES
+        )
+        visible = result["groups"]["good"].get("visible_defect_positions", [])
+        defect_text = ", ".join(escape(str(value)) for value in visible) or "none"
+        image_path = quote(result["annotated_image"].replace("\\", "/"))
+        cards.append(f"""
+        <article class="tray-card">
+          <div class="card-heading">
+            <h2>{escape(result['filename'])}</h2>
+            <span class="verdict {css_verdict}">{escape(verdict.replace('_', ' '))}</span>
+          </div>
+          <p><strong>Inspection rules:</strong> {escape(result['rule_tray_verdict'].replace('_', ' '))}
+             &nbsp; <strong>Calibration:</strong> {escape(str(result['alignment']['profile']))}</p>
+          <a href="{image_path}"><img src="{image_path}" alt="Annotated {escape(result['filename'])}"></a>
+          <div class="chips">{chips}</div>
+          <p><strong>Good-tray visible defect positions:</strong> {defect_text}</p>
+        </article>""")
+
+    summary = "".join(
+        f'<span class="summary-item"><strong>{verdict_counts[name]}</strong> '
+        f'{escape(name.replace("_", " "))}</span>'
+        for name in ("complete_order", "incomplete_order", "unresolved")
+    )
+    document = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vial inspection report</title>
+  <style>
+    :root {{ color-scheme: dark; font-family: Inter, Segoe UI, sans-serif; }}
+    body {{ margin: 0; background: #0b1020; color: #e8edf7; }}
+    header, main {{ width: min(1180px, calc(100% - 32px)); margin: auto; }}
+    header {{ padding: 34px 0 20px; }}
+    h1 {{ margin: 0 0 8px; font-size: clamp(1.8rem, 4vw, 3rem); }}
+    .notice {{ color: #b9c3d8; max-width: 800px; }}
+    .summary {{ display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }}
+    .summary-item, .chip {{ background: #172038; border: 1px solid #2b3858; border-radius: 999px; padding: 8px 12px; }}
+    main {{ display: grid; gap: 22px; padding-bottom: 48px; }}
+    .tray-card {{ background: #11182a; border: 1px solid #283553; border-radius: 16px; padding: 18px; box-shadow: 0 14px 34px #0005; }}
+    .card-heading {{ display: flex; align-items: center; justify-content: space-between; gap: 16px; }}
+    h2 {{ margin: 0; font-size: 1.25rem; }}
+    .verdict {{ border-radius: 8px; padding: 7px 10px; font-weight: 700; text-transform: uppercase; }}
+    .complete_order {{ background: #174d31; color: #a9f5ca; }}
+    .incomplete_order {{ background: #672628; color: #ffd0d0; }}
+    .unresolved {{ background: #5a491d; color: #ffe4a0; }}
+    img {{ display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid #34415d; background: #070a11; }}
+    .chips {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }}
+    .chip {{ padding: 5px 9px; font-size: .88rem; }}
+    .pass {{ border-color: #46be46; }} .missing_cap {{ border-color: #e62d2d; }}
+    .crooked_cap {{ border-color: #ffa500; }} .damaged_vial {{ border-color: #be46be; }}
+    .no_vial {{ border-color: #1e8cdc; }} a {{ color: inherit; }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vial inspection report</h1>
+    <p class="notice">Automated predictions for demonstration and evaluation. Results are not human-reviewed production dispositions.</p>
+    <div class="summary">{summary}</div>
+  </header>
+  <main>{''.join(cards)}</main>
+</body>
+</html>
+"""
+    Path(destination).write_text(document, encoding="utf-8")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--labeler", required=True, type=Path)
@@ -114,6 +254,8 @@ def main():
     parser.add_argument("--tray-model", type=Path,
                         help="optional trained tray classifier directory")
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--no-visual-report", action="store_true",
+                        help="skip annotated images and report.html")
     parser.add_argument("--good-expected-through", type=int, default=30)
     parser.add_argument("--scrap-expected-through", type=int)
     args = parser.parse_args()
@@ -227,6 +369,10 @@ def main():
                     "schema_version": BUNDLE_SCHEMA,
                     "manifest_sha256": bundle["manifest_sha256"],
                 }
+            if not args.no_visual_report:
+                relative_annotation = Path("annotated")/path.name
+                render_annotated(image, result, args.output/relative_annotation)
+                result["annotated_image"] = relative_annotation.as_posix()
             results.append(result)
             counts = Counter(slot["class"] for slot in result["slots"])
             summary_rows.append({"filename": path.name, "tray_verdict": result["tray_verdict"],
@@ -257,6 +403,8 @@ def main():
             writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
             writer.writeheader()
             writer.writerows(rows)
+    if not args.no_visual_report:
+        write_html_report(results, args.output/"report.html")
     print(f"INFERENCE VERIFIED images={len(results)} positions={len(position_rows)} "
           f"output={args.output}")
 
