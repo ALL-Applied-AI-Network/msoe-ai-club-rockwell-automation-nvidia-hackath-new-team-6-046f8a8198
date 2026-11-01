@@ -1,0 +1,19 @@
+{
+  "schema_version": "vial-two-stage-threshold-1",
+  "defect_threshold": 0.399706184864044,
+  "selected_on": "real Validation split",
+  "selection_objective": "macro_class_agreement",
+  "validation": {
+    "images": 35,
+    "positions": 866,
+    "agreement": 0.715935334872979,
+    "macro_class_agreement": 0.864028648936766
+  },
+  "testing": {
+    "images": 68,
+    "positions": 1704,
+    "agreement": 0.715962441314554,
+    "macro_class_agreement": 0.860743553647782
+  },
+  "warning": "Metrics use high-confidence fixture pseudo-labels, not certified ground truth."
+}

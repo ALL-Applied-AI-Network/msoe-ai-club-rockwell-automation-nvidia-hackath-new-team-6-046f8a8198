@@ -99,6 +99,20 @@ python train_baseline.py \
 Use `--pass-weight` to tune the false-defect cost on a real validation split.
 Choose the value using Validation only, then report Testing once.
 
+For a direct false-alarm control, train a pass/defect gate followed by a defect
+classifier:
+
+```bash
+python train_two_stage.py \
+  --dataset-root output/classification-v1 output/real-pseudo-v1 \
+  --output output/two-stage-v1 --seed 2026
+```
+
+Run `evaluate_real_dataset.py --model output/two-stage-v1 --tune-threshold`
+on Validation, then pass the selected `--defect-threshold` to one Testing run.
+The selected project profile is stored in `two_stage_profile.json`; use
+`--threshold-profile two_stage_profile.json` for repeatable inference.
+
 ## Check the real-image domain gap
 
 `evaluate_real.py` applies the synthetic-trained model to calibrated crops from

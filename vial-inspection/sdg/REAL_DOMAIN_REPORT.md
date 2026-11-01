@@ -97,3 +97,24 @@ produced the same 63.5% overall and 83.0% macro agreement as weight 1, so the
 unweighted hybrid remains the selected baseline. No additional Testing tuning
 was performed. The false-positive reduction needs more varied real pass crops
 or a two-stage pass/defect model rather than a class-cost change.
+
+## Two-stage result
+
+A binary pass/defect SVM followed by a four-class defect SVM was trained on the
+same hybrid crops. Validation-only threshold selection chose a defect score of
+`0.399706184864044`. The locked threshold was then evaluated once on Testing.
+
+| Metric | One-stage Testing | Two-stage Testing |
+| --- | ---: | ---: |
+| Overall agreement | 66.3% | **71.6%** |
+| Macro class agreement | 86.0% | **86.1%** |
+| pass | 64% | **70%** |
+| missing_cap | 96% | 96% |
+| crooked_cap | **77%** | 72% |
+| damaged_vial | 100% | 100% |
+| no_vial | 92% | 92% |
+
+The two-stage gate reduces false defect alarms while retaining most defect
+performance, at the cost of five percentage points of crooked-cap agreement.
+The selected threshold and evaluation provenance are versioned in
+`two_stage_profile.json`.

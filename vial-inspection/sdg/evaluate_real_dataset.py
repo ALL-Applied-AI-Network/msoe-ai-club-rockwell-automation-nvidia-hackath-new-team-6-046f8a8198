@@ -52,6 +52,41 @@ def summarize(rows):
             "per_class": per_class, "agreement_matrix": matrix}
 
 
+def apply_two_stage_threshold(rows, threshold):
+    for row in rows:
+        if "defect_score" in row:
+            row["predicted_class"] = (row["defect_class"]
+                                      if row["defect_score"] > threshold else "pass")
+
+
+def load_predictor(model_path, threshold_override=None):
+    model_path = Path(model_path)
+    if model_path.is_dir():
+        metadata = json.loads((model_path/"model.json").read_text())
+        if metadata.get("schema_version") != "vial-two-stage-1":
+            raise ValueError("unsupported model directory")
+        threshold = (metadata["defect_threshold"] if threshold_override is None
+                     else threshold_override)
+        return {"kind": "two_stage", "stage1": cv2.ml.SVM_load(str(model_path/"stage1.yml")),
+                "stage2": cv2.ml.SVM_load(str(model_path/"stage2.yml")),
+                "sign": metadata["positive_sign"], "threshold": threshold}
+    if threshold_override is not None:
+        raise ValueError("defect-threshold requires a two-stage model directory")
+    return {"kind": "single", "model": cv2.ml.SVM_load(str(model_path))}
+
+
+def predict(predictor, features):
+    if predictor["kind"] == "single":
+        _, values = predictor["model"].predict(features)
+        return values.reshape(-1).astype(int), None, None
+    _, raw = predictor["stage1"].predict(features, flags=cv2.ml.STAT_MODEL_RAW_OUTPUT)
+    scores = raw.reshape(-1)*predictor["sign"]
+    _, defects = predictor["stage2"].predict(features)
+    defect_ids = defects.reshape(-1).astype(int)+1
+    values = np.where(scores > predictor["threshold"], defect_ids, 0)
+    return values, scores, defect_ids
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True, type=Path)
@@ -63,6 +98,11 @@ def main():
     parser.add_argument("--exclude", nargs="*", default=[])
     parser.add_argument("--min-confidence", type=float, default=0.90)
     parser.add_argument("--areas", choices=("good", "all"), default="good")
+    parser.add_argument("--defect-threshold", type=float)
+    parser.add_argument("--threshold-profile", type=Path,
+                        help="JSON profile containing a selected defect_threshold")
+    parser.add_argument("--tune-threshold", action="store_true",
+                        help="select a two-stage threshold on this split by macro agreement")
     args = parser.parse_args()
     if args.output.exists():
         parser.error("output already exists; choose a new file")
@@ -72,7 +112,17 @@ def main():
         parser.error("no non-excluded JPG images found")
 
     labeler = load_labeler(args.labeler)
-    model = cv2.ml.SVM_load(str(args.model))
+    if args.defect_threshold is not None and args.threshold_profile is not None:
+        parser.error("choose either defect-threshold or threshold-profile")
+    threshold_override = args.defect_threshold
+    if args.threshold_profile is not None:
+        profile = json.loads(args.threshold_profile.read_text())
+        if profile.get("schema_version") != "vial-two-stage-threshold-1":
+            parser.error("unsupported threshold profile")
+        threshold_override = float(profile["defect_threshold"])
+    predictor = load_predictor(args.model, threshold_override)
+    if args.tune_threshold and predictor["kind"] != "two_stage":
+        parser.error("tune-threshold requires a two-stage model directory")
     hog = cv2.HOGDescriptor((64, 64), (16, 16), (8, 8), (8, 8), 9)
     rows, failures, per_image = [], [], []
     for index, path in enumerate(paths, 1):
@@ -88,14 +138,17 @@ def main():
                 raise ValueError("no positions met the confidence threshold")
             features = np.asarray([extract_feature(image, slot["bbox"], hog)
                                    for slot in selected], dtype=np.float32)
-            _, predictions = model.predict(features)
+            predictions, scores, defect_ids = predict(predictor, features)
             image_rows = []
-            for slot, predicted_id in zip(selected, predictions.reshape(-1).astype(int)):
+            for position, (slot, predicted_id) in enumerate(zip(selected, predictions)):
                 row = {"image": path.name, "profile": result["alignment"]["profile"],
                        "slot": slot["id"], "reference_class": slot["class"],
                        "reference_confidence": slot["prediction_confidence"],
                        "reference_source": slot.get("prediction_source"),
                        "predicted_class": CLASSES[predicted_id]}
+                if scores is not None:
+                    row.update({"defect_score": float(scores[position]),
+                                "defect_class": CLASSES[int(defect_ids[position])]})
                 rows.append(row)
                 image_rows.append(row)
             image_matches = sum(item["reference_class"] == item["predicted_class"]
@@ -110,11 +163,40 @@ def main():
     if not rows:
         raise SystemExit("no evaluable positions")
 
+    threshold_selection = None
+    if args.tune_threshold:
+        score_values = np.asarray([row["defect_score"] for row in rows])
+        candidates = sorted(set(np.quantile(score_values, np.linspace(0.0, 1.0, 201)).tolist()+[0.0]))
+        best = None
+        for threshold in candidates:
+            apply_two_stage_threshold(rows, threshold)
+            result = summarize(rows)
+            key = (result["macro_class_agreement"], result["agreement"], -abs(threshold))
+            if best is None or key > best[0]:
+                best = (key, threshold, result)
+        _, selected_threshold, selected_summary = best
+        apply_two_stage_threshold(rows, selected_threshold)
+        threshold_selection = {"selected": selected_threshold,
+                               "candidate_count": len(candidates),
+                               "objective": "macro_class_agreement",
+                               "macro_class_agreement": selected_summary["macro_class_agreement"],
+                               "agreement": selected_summary["agreement"]}
+        for item in per_image:
+            image_rows = [row for row in rows if row["image"] == item["image"]]
+            item["agreement"] = sum(row["reference_class"] == row["predicted_class"]
+                                    for row in image_rows)/len(image_rows)
+
     summary = summarize(rows)
     report = {"schema_version": "vial-real-split-agreement-1",
               "warning": "Fixture mappings include machine-generated pseudo-labels; not certified ground truth.",
               "images_requested": len(paths), "images_evaluated": len(per_image),
               "areas": args.areas, "min_confidence": args.min_confidence,
+              "model_kind": predictor["kind"],
+              "defect_threshold": (threshold_selection["selected"] if threshold_selection
+                                   else predictor.get("threshold")),
+              "threshold_selection": threshold_selection,
+              "threshold_profile": (str(args.threshold_profile.resolve())
+                                    if args.threshold_profile else None),
               "samples": len(rows), **summary,
               "reference_counts": dict(sorted(Counter(
                   row["reference_class"] for row in rows).items())),

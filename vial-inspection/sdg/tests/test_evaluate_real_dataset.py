@@ -19,3 +19,12 @@ def test_summarize_reports_macro_and_unsupported_class():
     assert result["macro_class_agreement"] == 0.75
     assert result["per_class"]["pass"]["agreement"] == 0.5
     assert result["per_class"]["missing_cap"]["agreement"] is None
+
+
+def test_apply_two_stage_threshold_changes_only_gate_decision():
+    rows = [
+        {"defect_score": -0.2, "defect_class": "missing_cap", "predicted_class": "x"},
+        {"defect_score": 0.8, "defect_class": "crooked_cap", "predicted_class": "x"},
+    ]
+    MODULE.apply_two_stage_threshold(rows, 0.5)
+    assert [row["predicted_class"] for row in rows] == ["pass", "crooked_cap"]
