@@ -12,7 +12,8 @@ import numpy as np
 
 def load_rows(dataset_root):
     with (Path(dataset_root)/"manifest.csv").open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        return [{**row, "_root": str(Path(dataset_root).resolve())}
+                for row in csv.DictReader(handle)]
 
 
 def hog_features(path, hog):
@@ -22,6 +23,11 @@ def hog_features(path, hog):
     image = cv2.resize(image, (64, 64), interpolation=cv2.INTER_AREA)
     image = cv2.equalizeHist(image)
     return hog.compute(image).reshape(-1)
+
+
+def crop_path(row):
+    """Resolve either the standard export's image field or pseudo export's path field."""
+    return Path(row["_root"])/(row.get("path") or row["image"])
 
 
 def confusion_matrix(actual, predicted, class_count):
@@ -49,14 +55,17 @@ def metrics_from_confusion(matrix):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset-root", required=True, type=Path)
+    parser.add_argument("--dataset-root", required=True, type=Path, nargs="+",
+                        help="one or more compatible ImageFolder dataset roots")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--c", type=float, default=2.0)
     args = parser.parse_args()
-    metadata = json.loads((args.dataset_root/"dataset.json").read_text())
-    classes = metadata["classes"]
-    rows = load_rows(args.dataset_root)
+    metadata = [json.loads((root/"dataset.json").read_text()) for root in args.dataset_root]
+    classes = metadata[0]["classes"]
+    if any(item.get("classes") != classes for item in metadata):
+        parser.error("all dataset roots must use the same ordered classes")
+    rows = [row for root in args.dataset_root for row in load_rows(root)]
     if args.output.exists():
         parser.error("output already exists; choose a new directory")
     args.output.mkdir(parents=True)
@@ -66,7 +75,7 @@ def main():
     for split in ("train", "val"):
         selected = [row for row in rows if row["split"] == split]
         random.Random(args.seed).shuffle(selected)
-        features = np.asarray([hog_features(args.dataset_root/row["image"], hog)
+        features = np.asarray([hog_features(crop_path(row), hog)
                                for row in selected], dtype=np.float32)
         labels = np.asarray([int(row["class_id"]) for row in selected], dtype=np.int32)
         partitions[split] = (features, labels)
@@ -90,6 +99,7 @@ def main():
               "seed": args.seed, "c": args.c,
               "train_samples": int(len(partitions["train"][1])),
               "val_samples": int(len(actual)), "classes": classes,
+              "dataset_roots": [str(root.resolve()) for root in args.dataset_root],
               "accuracy": accuracy, "macro_f1": macro_f1,
               "confusion_matrix": matrix.tolist(), "per_class": per_class}
     svm.save(str(args.output/"model.yml"))

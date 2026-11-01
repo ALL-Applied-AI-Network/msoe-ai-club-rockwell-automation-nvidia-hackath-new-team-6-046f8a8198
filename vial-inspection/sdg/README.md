@@ -87,6 +87,15 @@ This baseline is an early data/pipeline diagnostic. The intended production
 model remains a transfer-learned image classifier evaluated against real,
 held-out inspection images.
 
+Pass multiple compatible roots to train a hybrid baseline without duplicating
+the crop files:
+
+```bash
+python train_baseline.py \
+  --dataset-root output/classification-v1 output/real-pseudo-v1 \
+  --output output/hybrid-baseline-v1 --seed 2026
+```
+
 ## Check the real-image domain gap
 
 `evaluate_real.py` applies the synthetic-trained model to calibrated crops from
@@ -102,3 +111,24 @@ python evaluate_real.py \
   --output output/real-agreement-v1.json \
   --areas good
 ```
+
+## Build a balanced real pseudo-label dataset
+
+`build_real_pseudo_dataset.py` runs the unattended labeler across a real image
+split, filters low-confidence positions, excludes named holdout images, splits
+by source image, and downsamples each class to a balanced ImageFolder dataset:
+
+```bash
+python build_real_pseudo_dataset.py \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --images ../../project/tray-inspection-detection-dataset/images/Training \
+  --detections-root ../../project/tray-inspection-detection-dataset/labels \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --output output/real-pseudo-v1 \
+  --exclude tray_000001.jpg tray_000122.jpg tray_000250.jpg tray_000271.jpg \
+  --min-confidence 0.90 --seed 2026
+```
+
+The output remains pseudo-labeled data, not certified ground truth. Balancing
+and image-level splitting prevent the dominant pass class and neighboring crops
+from making the validation result look artificially strong.

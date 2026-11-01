@@ -18,3 +18,10 @@ def test_confusion_matrix_and_metrics():
     assert per_class[0]["recall"] == 0.5
     assert per_class[1]["recall"] == 1.0
     assert 0.7 < macro_f1 < 0.75
+
+
+def test_crop_path_prefers_explicit_exported_crop():
+    row = {"_root": "/dataset", "image": "source.jpg", "path": "train/pass/crop.png"}
+    assert MODULE.crop_path(row) == Path("/dataset/train/pass/crop.png")
+    assert MODULE.crop_path({"_root": "/dataset", "image": "val/pass/image.png"}) == Path(
+        "/dataset/val/pass/image.png")

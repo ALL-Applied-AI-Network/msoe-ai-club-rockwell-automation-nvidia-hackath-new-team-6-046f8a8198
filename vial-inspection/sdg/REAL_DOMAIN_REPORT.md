@@ -41,3 +41,28 @@ the remaining disagreement modes, especially real pass/crooked-cap separation.
 
 Reproduce the diagnostic with `evaluate_real.py`; its JSON output retains every
 position-level disagreement and reference provenance.
+
+## Hybrid follow-up
+
+The full real training split was pseudo-labeled at a minimum confidence of
+0.90, excluding all four calibration images. All 244 eligible images aligned;
+balancing the limiting class produced 40 training and 10 validation examples
+per class. Combining those 250 real crops with the 1,500 synthetic crops gave:
+
+| Metric | Synthetic only | Hybrid |
+| --- | ---: | ---: |
+| Balanced validation accuracy | 91.7% | 90.9% |
+| Balanced validation macro-F1 | 91.7% | 90.9% |
+| Held-out real pseudo-label agreement | 5.0% | **70.0%** |
+
+Held-out agreement by profile was 73.3% for `view_001`, 66.7% for `view_122`,
+80.0% for `view_250_dark_upper`, and 60.0% for
+`view_271_bright_lower`. Real `no_vial` agreement was 100%, `crooked_cap` was
+75%, and `pass` was 67.9%. No held-out good-tray examples were pseudo-labeled
+`missing_cap` or `damaged_vial`, so real transfer for those two classes remains
+unmeasured.
+
+The bright-lower regime is now the clearest residual gap. The next data cycle
+should emphasize bright-lower pass examples and independently held-out real
+missing-cap and damaged-vial examples. These figures still measure agreement
+with pseudo-labels, not certified ground-truth accuracy.
