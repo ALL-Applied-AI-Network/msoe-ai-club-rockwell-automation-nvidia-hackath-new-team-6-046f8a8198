@@ -135,3 +135,23 @@ keeps the conservative inspection-rule verdict until a genuine tray-level
 model can be trained. A future tray model needs aggregated score-distribution
 features and more complete-order training examples; maximum score alone is not
 separable on this dataset.
+
+## Learned tray classifier
+
+A tray classifier was trained from the distribution of all 30 good-position
+gate scores, score quantiles and summary statistics, and predicted defect-type
+counts. The selected version deliberately excludes ordered slot identity and
+calibration-profile identity. An RBF SVM (`C=0.1`, `gamma=0.01`) was selected
+on Validation and then retrained on Training plus Validation.
+
+Testing results were 95.7% accuracy and 97.7% balanced accuracy: all four
+complete trays were accepted, and 63 of 66 incomplete trays were rejected. The
+three false accepts were `tray_000063.jpg`, `tray_000092.jpg`, and
+`tray_000194.jpg`.
+
+These results remain provisional. Only 21 complete trays exist, and neighboring
+frames from the complete-order acquisition run occur across the predefined
+splits. The distribution-only ablation reduces direct view/position leakage,
+but a genuinely independent acquisition is still required before deployment.
+The selected configuration and caveat are versioned in
+`tray_classifier_profile.json`.

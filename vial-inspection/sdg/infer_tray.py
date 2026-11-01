@@ -15,6 +15,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from evaluate_real_dataset import CLASSES, extract_feature, load_predictor, predict
+from train_tray_classifier import VERDICTS, tray_feature_vector
 
 
 def sha256(path):
@@ -48,6 +49,8 @@ def main():
     parser.add_argument("--model", required=True, type=Path,
                         help="two-stage model directory")
     parser.add_argument("--threshold-profile", required=True, type=Path)
+    parser.add_argument("--tray-model", type=Path,
+                        help="optional trained tray classifier directory")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--good-expected-through", type=int, default=30)
     parser.add_argument("--scrap-expected-through", type=int)
@@ -64,6 +67,14 @@ def main():
     predictor = load_predictor(args.model, threshold)
     if predictor["kind"] != "two_stage":
         parser.error("model must be a two-stage model directory")
+    tray_model = tray_scaler = tray_metadata = None
+    if args.tray_model is not None:
+        tray_metadata = json.loads((args.tray_model/"metrics.json").read_text())
+        if tray_metadata.get("schema_version") != "vial-tray-classifier-1":
+            parser.error("unsupported tray classifier")
+        tray_model = cv2.ml.SVM_load(str(args.tray_model/"model.yml"))
+        with np.load(args.tray_model/"scaler.npz") as values:
+            tray_scaler = (values["mean"], values["std"])
 
     labeler = load_module("vial_inference_labeler", args.labeler)
     prediction_module = __import__("prediction")
@@ -111,7 +122,22 @@ def main():
                                            if slot["id"].startswith("S")],
                                           args.scrap_expected_through),
             }
-            result["tray_verdict"] = tray_verdict(result["groups"])
+            result["rule_tray_verdict"] = tray_verdict(result["groups"])
+            if tray_model is not None:
+                tray_features = tray_feature_vector(scores, defect_ids,
+                                                    result["alignment"]["profile"],
+                                                    tray_metadata["feature_set"])
+                mean, std = tray_scaler
+                _, tray_prediction = tray_model.predict(
+                    ((tray_features-mean)/std).reshape(1, -1).astype(np.float32))
+                result["tray_verdict"] = VERDICTS[int(tray_prediction[0, 0])]
+                result["tray_model"] = {
+                    "feature_set": tray_metadata["feature_set"],
+                    "model_sha256": sha256(args.tray_model/"model.yml"),
+                    "scaler_sha256": sha256(args.tray_model/"scaler.npz"),
+                }
+            else:
+                result["tray_verdict"] = result["rule_tray_verdict"]
             result["backend"] = "two_stage_hog_svm_plus_scrap_appearance"
             result["model"] = {"directory": str(args.model.resolve()),
                                "stage1_sha256": sha256(args.model/"stage1.yml"),
@@ -121,6 +147,7 @@ def main():
             results.append(result)
             counts = Counter(slot["class"] for slot in result["slots"])
             summary_rows.append({"filename": path.name, "tray_verdict": result["tray_verdict"],
+                                 "rule_tray_verdict": result["rule_tray_verdict"],
                                  "good_complete_order": result["groups"]["good"]["findings"]["complete_order"],
                                  "good_missing_vial": result["groups"]["good"]["findings"]["missing_vial"],
                                  "good_bad_as_good": result["groups"]["good"]["findings"]["bad_misclassified_as_good"],

@@ -1,0 +1,28 @@
+{
+  "schema_version": "vial-tray-classifier-profile-1",
+  "feature_set": "distribution",
+  "feature_count": 47,
+  "selected_config": {
+    "kernel": "rbf",
+    "c": 0.1,
+    "gamma": 0.01
+  },
+  "validation": {
+    "accuracy": 0.8857142857142857,
+    "balanced_accuracy": 0.7045454545454546,
+    "complete_order_recall": 0.5,
+    "incomplete_order_recall": 0.9090909090909091
+  },
+  "testing": {
+    "accuracy": 0.9571428571428572,
+    "balanced_accuracy": 0.9772727272727273,
+    "complete_order_recall": 1.0,
+    "incomplete_order_recall": 0.9545454545454546
+  },
+  "testing_false_accepts": [
+    "tray_000063.jpg",
+    "tray_000092.jpg",
+    "tray_000194.jpg"
+  ],
+  "warning": "Only 21 complete-order trays are supplied, with neighboring acquisition frames across predefined splits. Treat Testing metrics as provisional."
+}

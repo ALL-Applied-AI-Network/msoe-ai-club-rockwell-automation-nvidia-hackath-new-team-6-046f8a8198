@@ -126,12 +126,15 @@ python infer_tray.py \
   --files tray_000012.jpg tray_000013.jpg \
   --calibration ../labeler_extensions/calibration/calibration.json \
   --model output/two-stage-v1 \
+  --tray-model output/tray-classifier-v1 \
   --threshold-profile two_stage_profile.json \
   --output output/inference-demo-v1
 ```
 
 The command exports `results.json`, a position-level CSV, and a tray summary
-CSV. Scrap routing is intentionally left unresolved unless an upstream
+CSV. When `--tray-model` is present, both the learned tray verdict and the
+conservative inspection-rule verdict are retained. Scrap routing is
+intentionally left unresolved unless an upstream
 position-level verdict is available; a visually passing scrap vial alone does
 not prove a routing error.
 
@@ -153,6 +156,25 @@ For the current HOG/SVM model this audit fails: the Validation-selected maximum
 score threshold has only 15.2% incomplete-order recall on Testing. Do not use
 that experimental threshold for deployment. `two_stage_profile.json` remains
 the supported position-level profile, and its tray verdict is conservative.
+
+Train a genuine tray classifier from all 30 ordered gate scores, their sorted
+distribution, summary statistics, defect-candidate counts, and calibration
+profile. Candidate SVM configurations are selected on Validation; only the
+chosen configuration is evaluated on Testing:
+
+```bash
+python train_tray_classifier.py \
+  --position-model output/two-stage-v1 \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --dataset-root ../../project/tray-inspection-detection-dataset/images \
+  --verdicts ../../project/tray-inspection-detection-dataset/tray_verdicts.csv \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --output output/tray-classifier-v1 --feature-set distribution
+```
+
+`distribution` is the safer default: it excludes ordered slot identity and
+calibration-profile identity to reduce acquisition-sequence leakage. Use
+`--feature-set full` only as an explicitly labeled ablation.
 
 ## Check the real-image domain gap
 
