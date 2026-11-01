@@ -1,6 +1,23 @@
 # Vial labeling tool for hackathon participants
 
-This standalone tool creates an offline browser page for **manual** labeling of 60 positions in a vial fixture image. It makes no class predictions, requires no API key or GPU, and does not send images over the network. Two public images are included as geometry references and examples. No organizer review history or held-out annotations are included.
+This standalone tool creates an offline browser page for labeling 60 positions in a vial fixture image. Manual mode remains the default. An optional local prediction mode combines the supplied legacy YOLO boxes with calibrated cap appearance and fixture fill order; it requires no API key or GPU and does not send images over the network. Predictions include confidence and provenance. Two public images are included as geometry references and examples. No organizer review history or held-out annotations are included.
+
+## Optional prediction mode
+
+Point `--detections-root` at the dataset's `labels` directory to populate all 60 slot classes. Predictions remain draft unless `--auto-confirm-predictions` is explicitly supplied.
+
+```powershell
+python labeler.py run `
+  --images ..\..\..\project\tray-inspection-detection-dataset\images\Testing `
+  --files tray_000250.jpg `
+  --calibration ..\..\labeler_extensions\calibration\calibration.json `
+  --profile view_250_dark_upper --offset 0 0 `
+  --detections-root ..\..\..\project\tray-inspection-detection-dataset\labels `
+  --auto-confirm-predictions `
+  --output review-250-predicted
+```
+
+Auto-confirmation is intended for time-constrained baseline generation, not ground-truth certification. Use `prediction_confidence` and `prediction_source` when auditing or filtering results.
 
 ## Try the review page
 

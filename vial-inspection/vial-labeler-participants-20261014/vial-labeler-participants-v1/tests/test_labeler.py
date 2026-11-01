@@ -121,6 +121,20 @@ class ParticipantTests(unittest.TestCase):
         self.assertEqual(result['missing_positions'],[2])
         self.assertEqual(result['not_yet_filled_positions'],[30])
 
+    def test_prediction_mode_populates_all_slots_with_provenance(self):
+        labels=self.root/'labels';labels.mkdir()
+        labels.joinpath('tray_000001.txt').write_text('3 0.561458 0.368519 0.04 0.04\n')
+        results,_=labeler.prepare([labeler.HERE/'examples/tray_000001.jpg'],
+                                  profile_id='view_001',offset=(0,0),
+                                  detections_root=labels,auto_confirm_predictions=True)
+        r=results[0]
+        self.assertEqual(len(r['slots']),60)
+        self.assertTrue(all(s['class'] in labeler.CLASSES for s in r['slots']))
+        self.assertTrue(all(s['review_status']=='confirmed' for s in r['slots']))
+        self.assertTrue(all('prediction_confidence' in s and 'prediction_source' in s for s in r['slots']))
+        self.assertEqual(r['backend'],'legacy_yolo_plus_appearance')
+        self.assertEqual(r['annotation_status'],'reviewed')
+
 
 if __name__=='__main__':
     unittest.main()

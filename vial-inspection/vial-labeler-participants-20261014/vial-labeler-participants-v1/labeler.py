@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline manual vial annotation: prepare a review page and import reviewed JSON."""
+"""Offline vial annotation: manual review plus optional local prediction seeding."""
 import argparse
 import copy
 import csv
@@ -15,7 +15,7 @@ from PIL import Image, ImageOps
 from rules import CLASSES, summarize
 
 HERE = Path(__file__).resolve().parent
-VERSION = 'participant-1.0'
+VERSION = 'participant-1.1-predict'
 
 
 def sha(path):
@@ -54,11 +54,12 @@ def anchor(im, boxes, offset):
 
 
 def fingerprint(config):
-    parts = [sha(HERE/name) for name in ('labeler.py','rules.py')]
+    parts = [sha(HERE/name) for name in ('labeler.py','rules.py','prediction.py')]
     return hashlib.sha256((json.dumps(config,sort_keys=True)+''.join(parts)).encode()).hexdigest()
 
 
-def prepare(paths, config_path=HERE/'calibration.json', profile_id=None, offset=None):
+def prepare(paths, config_path=HERE/'calibration.json', profile_id=None, offset=None,
+            detections_root=None, auto_confirm_predictions=False):
     config = read(config_path)
     if config['image_size'] != [1920,1080]:
         raise ValueError('This review layout supports 1920x1080 images only; recalibration and layout changes are required')
@@ -116,6 +117,12 @@ def prepare(paths, config_path=HERE/'calibration.json', profile_id=None, offset=
                     center=[round(x,2),round(y,2)],bbox=box,
                     **{'class':None},presence=None,review_status='draft',
                     reason='',reference_match=None,suggested_class=None))
+        if detections_root is not None:
+            from prediction import predict
+            matches = list(Path(detections_root).resolve().rglob(path.stem+'.txt'))
+            if len(matches) != 1:
+                raise ValueError(f'{path.name}: expected exactly one legacy YOLO label under {detections_root}; found {len(matches)}')
+            predict(result, im, matches[0], auto_confirm=auto_confirm_predictions)
         recompute(result)
         results.append(result)
     return results, {p.name:p for p in paths}
@@ -158,7 +165,8 @@ def save(results, sources, output):
         for r in results:
             for s in r['slots']:
                 writer.writerow(dict(image=r['filename'],slot=s['id'],**{k:s[k] for k in fields[2:]}))
-    write(output/'manifest.json',dict(version=VERSION,mode='manual',created_at=datetime.now(timezone.utc).isoformat(),
+    mode = 'predicted' if any(r['backend']!='manual_annotation' for r in results) else 'manual'
+    write(output/'manifest.json',dict(version=VERSION,mode=mode,created_at=datetime.now(timezone.utc).isoformat(),
         images=[dict(filename=r['filename'],source_sha256=r['source_sha256']) for r in results]))
     build_report(results,output/'index.html')
     print(f'{len(results)} images, {60*len(results)} positions. Open {output/"index.html"}')
@@ -225,6 +233,10 @@ def main():
     run.add_argument('--calibration',type=Path,default=HERE/'calibration.json')
     run.add_argument('--profile',help='Explicitly select a geometry profile')
     run.add_argument('--offset',type=int,nargs=2,metavar=('DX','DY'),help='Verified manual translation; requires --profile')
+    run.add_argument('--detections-root',type=Path,
+                     help='Recursively find legacy YOLO <image-stem>.txt files and seed all 60 classes')
+    run.add_argument('--auto-confirm-predictions',action='store_true',
+                     help='Mark predicted classes confirmed; confidence and provenance remain attached')
     review=sub.add_parser('import-review',help='Validate browser export against the original portable template')
     review.add_argument('review',type=Path)
     review.add_argument('--template',type=Path,required=True,help='Original review folder labels.json')
@@ -234,7 +246,8 @@ def main():
         if args.command=='run':
             if any(Path(name).name!=name for name in args.files):
                 raise ValueError('--files accepts basenames only')
-            results,sources=prepare([args.images/name for name in args.files],args.calibration,args.profile,args.offset)
+            results,sources=prepare([args.images/name for name in args.files],args.calibration,args.profile,args.offset,
+                                    args.detections_root,args.auto_confirm_predictions)
             save(results,sources,args.output)
         else:
             import_review(args.review,args.template,args.output)

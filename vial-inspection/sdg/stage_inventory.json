@@ -1,0 +1,4826 @@
+{
+  "stage": "/workspace/vial-inspection/csi_digital_twin_v1/stations/tray_inspection/tray_inspection.usdc",
+  "default_prim": "/TrayInspection",
+  "meters_per_unit": 1.0,
+  "up_axis": "Z",
+  "total_prims": 310,
+  "type_counts": {
+    "Camera": 5,
+    "GeomSubset": 35,
+    "Material": 42,
+    "Mesh": 86,
+    "RectLight": 2,
+    "RenderProduct": 1,
+    "RenderSettings": 1,
+    "RenderVar": 1,
+    "Scope": 1,
+    "Shader": 42,
+    "Xform": 90,
+    "untyped": 4
+  },
+  "included_prims": 300,
+  "prims": [
+    {
+      "path": "/TrayInspection",
+      "name": "TrayInspection",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 90
+    },
+    {
+      "path": "/TrayInspection/tray_good_top",
+      "name": "tray_good_top",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.367792,
+        -0.657606,
+        1.221867
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_top/tray_good_top",
+      "name": "tray_good_top",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.367792,
+        -0.657606,
+        1.221867
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G09_tube",
+      "name": "G09_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444089,
+        -0.59687,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G09_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444089,
+        -0.59687,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S01_cap",
+      "name": "S01_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.873722,
+        -0.628789,
+        1.230648
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S01_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.873722,
+        -0.628789,
+        1.230648
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G19_cap",
+      "name": "G19_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342147,
+        -0.596508,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G19_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342147,
+        -0.596508,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G14_tube",
+      "name": "G14_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394516,
+        -0.597417,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G14_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394516,
+        -0.597417,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S03_tube",
+      "name": "S03_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.785611,
+        -0.488449,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S03_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.785611,
+        -0.488449,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G08_cap",
+      "name": "G08_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444852,
+        -0.658509,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G08_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444852,
+        -0.658509,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G24_tube",
+      "name": "G24_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291109,
+        -0.595379,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G24_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291109,
+        -0.595379,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G03_tube",
+      "name": "G03_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495782,
+        -0.658787,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G03_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495782,
+        -0.658787,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G14_cap",
+      "name": "G14_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394603,
+        -0.597429,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G14_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394603,
+        -0.597429,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S04_cap",
+      "name": "S04_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.87489,
+        -0.409403,
+        1.22605
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S04_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.87489,
+        -0.409403,
+        1.22605
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G13_cap",
+      "name": "G13_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393442,
+        -0.656886,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G13_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393442,
+        -0.656886,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G15_cap",
+      "name": "G15_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.392824,
+        -0.535467,
+        1.271767
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G15_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.392824,
+        -0.535467,
+        1.271767
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G08_tube",
+      "name": "G08_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.4442,
+        -0.657697,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G08_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.4442,
+        -0.657697,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/key_overhead",
+      "name": "key_overhead",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.5588,
+        -0.8128,
+        2.4003
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/key_overhead/key_overhead",
+      "name": "key_overhead",
+      "type": "RectLight",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.5588,
+        -0.8128,
+        2.4003
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G27_tube",
+      "name": "G27_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.23929,
+        -0.717943,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G27_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.23929,
+        -0.717943,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_001",
+      "name": "tray_good_post_001",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.51274,
+        -0.514268,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_001/post_001",
+      "name": "post_001",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.51274,
+        -0.514268,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G26_tube",
+      "name": "G26_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239028,
+        -0.779302,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G26_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239028,
+        -0.779302,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post",
+      "name": "tray_scrap_post",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.850931,
+        -0.63304,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post/post_004",
+      "name": "post_004",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.850931,
+        -0.63304,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G20_tube",
+      "name": "G20_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.343743,
+        -0.534814,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G20_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.343743,
+        -0.534814,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G16_cap",
+      "name": "G16_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341604,
+        -0.780138,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G16_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341604,
+        -0.780138,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G13_tube",
+      "name": "G13_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393148,
+        -0.657182,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G13_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393148,
+        -0.657182,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/note_good",
+      "name": "note_good",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.25908,
+        -0.39624,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/note_good/note_good",
+      "name": "note_good",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.25908,
+        -0.39624,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_003",
+      "name": "tray_good_post_003",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.224454,
+        -0.512658,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_003/post_003",
+      "name": "post_003",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.224454,
+        -0.512658,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_label_001",
+      "name": "tray_label_001",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.41529,
+        -0.39116,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_label_001/tray_label_001",
+      "name": "tray_label_001",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.41529,
+        -0.39116,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716",
+      "name": "AU_001436920200716",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716",
+      "name": "AU_001436920200716",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 35
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_187_187_187__002",
+      "name": "Opaque_187_187_187__002",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_51_51_51__001",
+      "name": "Opaque_51_51_51__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_204_204_204__002",
+      "name": "Opaque_204_204_204__002",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_255_255_255__003",
+      "name": "Opaque_255_255_255__003",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_192_192_192__004",
+      "name": "Opaque_192_192_192__004",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_221_221_0__001",
+      "name": "Opaque_221_221_0__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_187_119_102_",
+      "name": "Opaque_187_119_102_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_101_240_115__002",
+      "name": "Opaque_101_240_115__002",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_170_187_221__002",
+      "name": "Opaque_170_187_221__002",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_221_0_0__001",
+      "name": "Opaque_221_0_0__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_17_187_17__001",
+      "name": "Opaque_17_187_17__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Rubber___Black",
+      "name": "Rubber___Black",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_102_102_102_",
+      "name": "Opaque_102_102_102_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_128_128_128__006",
+      "name": "Opaque_128_128_128__006",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_63_63_63__002",
+      "name": "Opaque_63_63_63__002",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_34_34_34_",
+      "name": "Opaque_34_34_34_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_17_17_17_",
+      "name": "Opaque_17_17_17_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_221_232_255_",
+      "name": "Opaque_221_232_255_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_255_0_0__005",
+      "name": "Opaque_255_0_0__005",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_203_210_239__004",
+      "name": "Opaque_203_210_239__004",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_192_192_255__001",
+      "name": "Opaque_192_192_255__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_129_129_129__001",
+      "name": "Opaque_129_129_129__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_118_136_143_",
+      "name": "Opaque_118_136_143_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_255_255_168_",
+      "name": "Opaque_255_255_168_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_57_111_174_",
+      "name": "Opaque_57_111_174_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_244_244_244__001",
+      "name": "Opaque_244_244_244__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_191_191_191__001",
+      "name": "Opaque_191_191_191__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_165_173_177_",
+      "name": "Opaque_165_173_177_",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_0_255_0__004",
+      "name": "Opaque_0_255_0__004",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/Opaque_198_193_188__001",
+      "name": "Opaque_198_193_188__001",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/tw_table_paint",
+      "name": "tw_table_paint",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/tw_black_plate",
+      "name": "tw_black_plate",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/tw_steel",
+      "name": "tw_steel",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/tw_knob_red",
+      "name": "tw_knob_red",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/AU_001436920200716/AU_001436920200716/tw_robot_yellow",
+      "name": "tw_robot_yellow",
+      "type": "GeomSubset",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        -0.120045,
+        0.101566,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G25_cap",
+      "name": "G25_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291363,
+        -0.533756,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G25_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291363,
+        -0.533756,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G23_tube",
+      "name": "G23_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291259,
+        -0.657541,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G23_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291259,
+        -0.657541,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_support",
+      "name": "tray_scrap_support",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.70866,
+        -0.487045,
+        1.177798
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_support/tray_scrap_support",
+      "name": "tray_scrap_support",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.70866,
+        -0.487045,
+        1.177798
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G28_tube",
+      "name": "G28_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239,
+        -0.657023,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G28_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239,
+        -0.657023,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G12_cap",
+      "name": "G12_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.39372,
+        -0.718739,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G12_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.39372,
+        -0.718739,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G18_cap",
+      "name": "G18_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342483,
+        -0.657465,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G18_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342483,
+        -0.657465,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G07_tube",
+      "name": "G07_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444372,
+        -0.718883,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G07_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444372,
+        -0.718883,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_001",
+      "name": "tray_scrap_post_001",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.854655,
+        -0.344774,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_001/post_005",
+      "name": "post_005",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.854655,
+        -0.344774,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G01_cap",
+      "name": "G01_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494785,
+        -0.78001,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G01_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494785,
+        -0.78001,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G20_cap",
+      "name": "G20_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.344742,
+        -0.535219,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G20_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.344742,
+        -0.535219,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G17_cap",
+      "name": "G17_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342158,
+        -0.719342,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G17_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342158,
+        -0.719342,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G12_tube",
+      "name": "G12_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393765,
+        -0.718592,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G12_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.393765,
+        -0.718592,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G30_tube",
+      "name": "G30_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.240051,
+        -0.534811,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G30_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.240051,
+        -0.534811,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G02_cap",
+      "name": "G02_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494963,
+        -0.71929,
+        1.271768
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G02_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494963,
+        -0.71929,
+        1.271768
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G21_cap",
+      "name": "G21_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.289763,
+        -0.779265,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G21_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.289763,
+        -0.779265,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G06_cap",
+      "name": "G06_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444369,
+        -0.780061,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G06_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444369,
+        -0.780061,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S01_tube",
+      "name": "S01_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.78403,
+        -0.618467,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S01_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.78403,
+        -0.618467,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G22_tube",
+      "name": "G22_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290634,
+        -0.71868,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G22_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290634,
+        -0.71868,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G03_cap",
+      "name": "G03_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495787,
+        -0.658785,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G03_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495787,
+        -0.658785,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G22_cap",
+      "name": "G22_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291305,
+        -0.718846,
+        1.271775
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G22_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291305,
+        -0.718846,
+        1.271775
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G11_cap",
+      "name": "G11_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394354,
+        -0.779582,
+        1.271768
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G11_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394354,
+        -0.779582,
+        1.271768
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S02_tube",
+      "name": "S02_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.784821,
+        -0.547195,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S02_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.784821,
+        -0.547195,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G06_tube",
+      "name": "G06_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444255,
+        -0.780108,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G06_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444255,
+        -0.780108,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G26_cap",
+      "name": "G26_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.238468,
+        -0.778842,
+        1.271775
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G26_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.238468,
+        -0.778842,
+        1.271775
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G23_cap",
+      "name": "G23_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290958,
+        -0.65693,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G23_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290958,
+        -0.65693,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_label_003",
+      "name": "tray_label_003",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.75565,
+        -0.221234,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_label_003/tray_label_003",
+      "name": "tray_label_003",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.75565,
+        -0.221234,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S04_tube",
+      "name": "S04_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.786402,
+        -0.430217,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S04_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.786402,
+        -0.430217,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G05_cap",
+      "name": "G05_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495936,
+        -0.534944,
+        1.271774
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G05_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.495936,
+        -0.534944,
+        1.271774
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G11_tube",
+      "name": "G11_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.392984,
+        -0.779537,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G11_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.392984,
+        -0.779537,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G24_cap",
+      "name": "G24_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290726,
+        -0.596636,
+        1.271769
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G24_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.290726,
+        -0.596636,
+        1.271769
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G25_tube",
+      "name": "G25_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291547,
+        -0.533775,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G25_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.291547,
+        -0.533775,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_good_support",
+      "name": "tray_good_support",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.367792,
+        -0.657606,
+        1.177798
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_support/tray_good_support",
+      "name": "tray_good_support",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.367792,
+        -0.657606,
+        1.177798
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G15_tube",
+      "name": "G15_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394254,
+        -0.535315,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G15_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.394254,
+        -0.535315,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/S05_tube",
+      "name": "S05_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.787193,
+        -0.360561,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/S05_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.787193,
+        -0.360561,
+        1.216152
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G21_tube",
+      "name": "G21_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.289184,
+        -0.779248,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G21_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.289184,
+        -0.779248,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G30_cap",
+      "name": "G30_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.240084,
+        -0.534836,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G30_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.240084,
+        -0.534836,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G16_tube",
+      "name": "G16_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341241,
+        -0.780133,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G16_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341241,
+        -0.780133,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G10_cap",
+      "name": "G10_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444934,
+        -0.535461,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G10_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444934,
+        -0.535461,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/fill_side",
+      "name": "fill_side",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        0.254,
+        -0.635,
+        2.032
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/fill_side/fill_side",
+      "name": "fill_side",
+      "type": "RectLight",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        0.254,
+        -0.635,
+        2.032
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G07_cap",
+      "name": "G07_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444423,
+        -0.718682,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G07_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.444423,
+        -0.718682,
+        1.271778
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_002",
+      "name": "tray_good_post_002",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.222844,
+        -0.800944,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_post_002/post_002",
+      "name": "post_002",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.222844,
+        -0.800944,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_003",
+      "name": "tray_scrap_post_003",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.566389,
+        -0.34105,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_003/post_007",
+      "name": "post_007",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.566389,
+        -0.34105,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G05_tube",
+      "name": "G05_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496118,
+        -0.535795,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G05_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496118,
+        -0.535795,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G17_tube",
+      "name": "G17_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341715,
+        -0.719303,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G17_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.341715,
+        -0.719303,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_good_post",
+      "name": "tray_good_post",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.51113,
+        -0.802554,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_good_post/post",
+      "name": "post",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.51113,
+        -0.802554,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/note_scrap",
+      "name": "note_scrap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.60706,
+        -0.24638,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/note_scrap/note_scrap",
+      "name": "note_scrap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.60706,
+        -0.24638,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_top",
+      "name": "tray_scrap_top",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.70866,
+        -0.487045,
+        1.221867
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_top/tray_scrap_top",
+      "name": "tray_scrap_top",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.70866,
+        -0.487045,
+        1.221867
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G27_cap",
+      "name": "G27_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.23898,
+        -0.717394,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G27_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.23898,
+        -0.717394,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_label_002",
+      "name": "tray_label_002",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.755904,
+        -0.742442,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_label_002/tray_label_002",
+      "name": "tray_label_002",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.755904,
+        -0.742442,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G10_tube",
+      "name": "G10_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.445122,
+        -0.53512,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G10_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.445122,
+        -0.53512,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G18_tube",
+      "name": "G18_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342423,
+        -0.65796,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G18_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342423,
+        -0.65796,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G29_tube",
+      "name": "G29_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239369,
+        -0.595602,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G29_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239369,
+        -0.595602,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G04_cap",
+      "name": "G04_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494572,
+        -0.598274,
+        1.271749
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G04_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494572,
+        -0.598274,
+        1.271749
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G28_cap",
+      "name": "G28_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239447,
+        -0.656102,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G28_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.239447,
+        -0.656102,
+        1.271772
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G01_tube",
+      "name": "G01_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494722,
+        -0.780012,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G01_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.494722,
+        -0.780012,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_label",
+      "name": "tray_label",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.41529,
+        -0.912368,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_label/tray_label",
+      "name": "tray_label",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.41529,
+        -0.912368,
+        1.110869
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G19_tube",
+      "name": "G19_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342428,
+        -0.596264,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G19_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.342428,
+        -0.596264,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G09_cap",
+      "name": "G09_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.4442,
+        -0.597485,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G09_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.4442,
+        -0.597485,
+        1.271776
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_002",
+      "name": "tray_scrap_post_002",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.562665,
+        -0.629316,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/tray_scrap_post_002/post_006",
+      "name": "post_006",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.562665,
+        -0.629316,
+        1.167892
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G29_cap",
+      "name": "G29_cap",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.238948,
+        -0.595259,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G29_cap/vial_cap",
+      "name": "vial_cap",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.238948,
+        -0.595259,
+        1.271777
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G02_tube",
+      "name": "G02_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496107,
+        -0.720055,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G02_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496107,
+        -0.720055,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/G04_tube",
+      "name": "G04_tube",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496435,
+        -0.596946,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/G04_tube/vial_tube",
+      "name": "vial_tube",
+      "type": "Mesh",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.496435,
+        -0.596946,
+        1.180338
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials",
+      "name": "_materials",
+      "type": "Scope",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 42
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_alu_brushed",
+      "name": "tw_alu_brushed",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_alu_brushed/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_vial_plastic",
+      "name": "tw_vial_plastic",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_vial_plastic/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_cap_yellow",
+      "name": "tw_cap_yellow",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_cap_yellow/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_black_plate",
+      "name": "tw_black_plate",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_black_plate/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_note_pink",
+      "name": "tw_note_pink",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_note_pink/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_label_white",
+      "name": "tw_label_white",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_label_white/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Steel___Satin_006",
+      "name": "Steel___Satin_006",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Steel___Satin_006/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_187_187_187__002",
+      "name": "Opaque_187_187_187__002",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_187_187_187__002/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_51_51_51__001",
+      "name": "Opaque_51_51_51__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_51_51_51__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_204_204_204__002",
+      "name": "Opaque_204_204_204__002",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_204_204_204__002/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_255_255__003",
+      "name": "Opaque_255_255_255__003",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_255_255__003/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_192_192_192__004",
+      "name": "Opaque_192_192_192__004",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_192_192_192__004/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_221_0__001",
+      "name": "Opaque_221_221_0__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_221_0__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_187_119_102_",
+      "name": "Opaque_187_119_102_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_187_119_102_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_101_240_115__002",
+      "name": "Opaque_101_240_115__002",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_101_240_115__002/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_170_187_221__002",
+      "name": "Opaque_170_187_221__002",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_170_187_221__002/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_0_0__001",
+      "name": "Opaque_221_0_0__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_0_0__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_17_187_17__001",
+      "name": "Opaque_17_187_17__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_17_187_17__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Rubber___Black",
+      "name": "Rubber___Black",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Rubber___Black/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_102_102_102_",
+      "name": "Opaque_102_102_102_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_102_102_102_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_128_128_128__006",
+      "name": "Opaque_128_128_128__006",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_128_128_128__006/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_63_63_63__002",
+      "name": "Opaque_63_63_63__002",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_63_63_63__002/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_34_34_34_",
+      "name": "Opaque_34_34_34_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_34_34_34_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_17_17_17_",
+      "name": "Opaque_17_17_17_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_17_17_17_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_232_255_",
+      "name": "Opaque_221_232_255_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_221_232_255_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_0_0__005",
+      "name": "Opaque_255_0_0__005",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_0_0__005/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_203_210_239__004",
+      "name": "Opaque_203_210_239__004",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_203_210_239__004/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_192_192_255__001",
+      "name": "Opaque_192_192_255__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_192_192_255__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_129_129_129__001",
+      "name": "Opaque_129_129_129__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_129_129_129__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_118_136_143_",
+      "name": "Opaque_118_136_143_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_118_136_143_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_255_168_",
+      "name": "Opaque_255_255_168_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_255_255_168_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_57_111_174_",
+      "name": "Opaque_57_111_174_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_57_111_174_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_244_244_244__001",
+      "name": "Opaque_244_244_244__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_244_244_244__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_191_191_191__001",
+      "name": "Opaque_191_191_191__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_191_191_191__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_165_173_177_",
+      "name": "Opaque_165_173_177_",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_165_173_177_/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_0_255_0__004",
+      "name": "Opaque_0_255_0__004",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_0_255_0__004/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_198_193_188__001",
+      "name": "Opaque_198_193_188__001",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/Opaque_198_193_188__001/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_table_paint",
+      "name": "tw_table_paint",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_table_paint/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_steel",
+      "name": "tw_steel",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_steel/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_knob_red",
+      "name": "tw_knob_red",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_knob_red/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_robot_yellow",
+      "name": "tw_robot_yellow",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_robot_yellow/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_note_cyan",
+      "name": "tw_note_cyan",
+      "type": "Material",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/_materials/tw_note_cyan/Principled_BSDF",
+      "name": "Principled_BSDF",
+      "type": "Shader",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/TrayInspection/CapSealCam",
+      "name": "CapSealCam",
+      "type": "Xform",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.315606,
+        -0.719984,
+        2.373378
+      ],
+      "semantic_attributes": {},
+      "children": 1
+    },
+    {
+      "path": "/TrayInspection/CapSealCam/CapSealCam",
+      "name": "CapSealCam",
+      "type": "Camera",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": "inherited",
+      "world_translation_m": [
+        -0.315606,
+        -0.719984,
+        2.373378
+      ],
+      "semantic_attributes": {},
+      "children": 0
+    },
+    {
+      "path": "/Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0",
+      "name": "omni_kit_widget_viewport_ViewportTexture_0",
+      "type": "RenderProduct",
+      "active": true,
+      "instance": false,
+      "instanceable": false,
+      "visibility": null,
+      "world_translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "semantic_attributes": {
+        "omni:rtx:syntheticdata:sensors:returnAllBBoxesOutsideFrustum": "False"
+      },
+      "children": 0
+    }
+  ]
+}

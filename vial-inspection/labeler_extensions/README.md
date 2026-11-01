@@ -12,7 +12,7 @@ Run the original tool with the external calibration:
 
 ```powershell
 python ..\vial-labeler-participants-20261014\vial-labeler-participants-v1\labeler.py run `
-  --images "..\tray-inspection-detection-dataset-20260911 3\images\Testing" `
+  --images "..\..\project\tray-inspection-detection-dataset\images\Testing" `
   --files tray_000250.jpg `
   --calibration calibration\calibration.json `
   --output review-250
@@ -45,7 +45,7 @@ The exporter deliberately does not mix fixture-level legacy classes such as
 ```powershell
 python export_training.py `
   --review review-250-confirmed\labels.json `
-  --split-root "..\tray-inspection-detection-dataset-20260911 3\images" `
+  --split-root "..\..\project\tray-inspection-detection-dataset\images" `
   --output training-export `
   --format both
 ```

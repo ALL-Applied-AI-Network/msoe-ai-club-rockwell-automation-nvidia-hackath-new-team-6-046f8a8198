@@ -6,6 +6,7 @@ data/
 datasets/
 project/datasets/
 vial-inspection/tray-inspection-detection-dataset-*/
+project/tray-inspection-detection-dataset/
 *.arrow
 *.parquet
 *.npy
@@ -20,6 +21,7 @@ vial-inspection/tray-inspection-detection-dataset-*/
 results/
 project/results/
 outputs/
+vial-inspection/sdg/output/
 training-export*/
 checkpoints/
 checkpoint-*/

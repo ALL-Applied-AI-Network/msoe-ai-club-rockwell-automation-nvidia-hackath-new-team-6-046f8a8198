@@ -1,0 +1,1760 @@
+{
+  "schema_version": "participant-1.1-predict",
+  "model_hash": "e2f4ff4fb6bd29f84092fd0590b4d1b6d0c15d3e2bbd23910d423d74979b2ecf",
+  "results": [
+    {
+      "schema_version": "participant-1.1-predict",
+      "filename": "tray_000122.jpg",
+      "source_path": "images/tray_000122.jpg",
+      "source_sha256": "869717d47bf97e227f5bb2a6c192751a2652928cf0ee25a19b8db340e17b36ef",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "model_hash": "e2f4ff4fb6bd29f84092fd0590b4d1b6d0c15d3e2bbd23910d423d74979b2ecf",
+      "backend": "legacy_yolo_plus_appearance",
+      "annotation_status": "reviewed",
+      "alignment": {
+        "profile": "view_122",
+        "offset": [
+          0,
+          0
+        ],
+        "residual": null,
+        "accepted": true,
+        "geometry_requires_visual_check": true
+      },
+      "context": {
+        "prediction": {
+          "legacy_yolo": "tray_000122.txt",
+          "auto_confirmed": true,
+          "scrap_fill_through": 15,
+          "scrap_evidence": {
+            "S01": 0.41614,
+            "S02": 0.15004,
+            "S03": 0.38081,
+            "S04": 0.22246,
+            "S05": 0.37167,
+            "S06": 0.41475,
+            "S07": 0.15751,
+            "S08": 0.54561,
+            "S09": 0.29423,
+            "S10": 0.38484,
+            "S11": 0.35238,
+            "S12": 0.15185,
+            "S13": 0.4324,
+            "S14": 0.23209,
+            "S15": 0.20037,
+            "S16": 0.47096,
+            "S17": 0.15484,
+            "S18": 0.40301,
+            "S19": 0.215,
+            "S20": 0.15248,
+            "S21": 0.46683,
+            "S22": 0.1453,
+            "S23": 0.18153,
+            "S24": 0.14228,
+            "S25": 0.14184,
+            "S26": 0.2622,
+            "S27": 0.14396,
+            "S28": 0.14217,
+            "S29": 0.13425,
+            "S30": 0.13872
+          }
+        }
+      },
+      "slots": [
+        {
+          "id": "G01",
+          "area": "good",
+          "position": 1,
+          "row": 1,
+          "column_from_right": 1,
+          "center": [
+            1075.0,
+            387.0
+          ],
+          "bbox": [
+            1037,
+            340,
+            1117,
+            430
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G01.jpg"
+        },
+        {
+          "id": "G02",
+          "area": "good",
+          "position": 2,
+          "row": 2,
+          "column_from_right": 1,
+          "center": [
+            1072.5,
+            464.5
+          ],
+          "bbox": [
+            1034,
+            418,
+            1114,
+            508
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G02.jpg"
+        },
+        {
+          "id": "G03",
+          "area": "good",
+          "position": 3,
+          "row": 3,
+          "column_from_right": 1,
+          "center": [
+            1070.0,
+            542.0
+          ],
+          "bbox": [
+            1032,
+            495,
+            1112,
+            585
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.957",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.9573,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G03.jpg"
+        },
+        {
+          "id": "G04",
+          "area": "good",
+          "position": 4,
+          "row": 4,
+          "column_from_right": 1,
+          "center": [
+            1067.5,
+            619.5
+          ],
+          "bbox": [
+            1030,
+            572,
+            1110,
+            662
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.696",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.696,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G04.jpg"
+        },
+        {
+          "id": "G05",
+          "area": "good",
+          "position": 5,
+          "row": 5,
+          "column_from_right": 1,
+          "center": [
+            1065.0,
+            697.0
+          ],
+          "bbox": [
+            1027,
+            650,
+            1107,
+            740
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.696",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.696,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G05.jpg"
+        },
+        {
+          "id": "G06",
+          "area": "good",
+          "position": 6,
+          "row": 1,
+          "column_from_right": 2,
+          "center": [
+            1009.6,
+            385.0
+          ],
+          "bbox": [
+            972,
+            338,
+            1052,
+            428
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G06.jpg"
+        },
+        {
+          "id": "G07",
+          "area": "good",
+          "position": 7,
+          "row": 2,
+          "column_from_right": 2,
+          "center": [
+            1007.25,
+            462.85
+          ],
+          "bbox": [
+            969,
+            416,
+            1049,
+            506
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G07.jpg"
+        },
+        {
+          "id": "G08",
+          "area": "good",
+          "position": 8,
+          "row": 3,
+          "column_from_right": 2,
+          "center": [
+            1004.9,
+            540.7
+          ],
+          "bbox": [
+            967,
+            494,
+            1047,
+            584
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G08.jpg"
+        },
+        {
+          "id": "G09",
+          "area": "good",
+          "position": 9,
+          "row": 4,
+          "column_from_right": 2,
+          "center": [
+            1002.55,
+            618.55
+          ],
+          "bbox": [
+            965,
+            572,
+            1045,
+            662
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G09.jpg"
+        },
+        {
+          "id": "G10",
+          "area": "good",
+          "position": 10,
+          "row": 5,
+          "column_from_right": 2,
+          "center": [
+            1000.2,
+            696.4
+          ],
+          "bbox": [
+            962,
+            649,
+            1042,
+            739
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G10.jpg"
+        },
+        {
+          "id": "G11",
+          "area": "good",
+          "position": 11,
+          "row": 1,
+          "column_from_right": 3,
+          "center": [
+            944.2,
+            383.0
+          ],
+          "bbox": [
+            906,
+            336,
+            986,
+            426
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G11.jpg"
+        },
+        {
+          "id": "G12",
+          "area": "good",
+          "position": 12,
+          "row": 2,
+          "column_from_right": 3,
+          "center": [
+            942.0,
+            461.2
+          ],
+          "bbox": [
+            904,
+            414,
+            984,
+            504
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.759",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.7594,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G12.jpg"
+        },
+        {
+          "id": "G13",
+          "area": "good",
+          "position": 13,
+          "row": 3,
+          "column_from_right": 3,
+          "center": [
+            939.8,
+            539.4
+          ],
+          "bbox": [
+            902,
+            492,
+            982,
+            582
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.970",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.97,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G13.jpg"
+        },
+        {
+          "id": "G14",
+          "area": "good",
+          "position": 14,
+          "row": 4,
+          "column_from_right": 3,
+          "center": [
+            937.6,
+            617.6
+          ],
+          "bbox": [
+            900,
+            571,
+            980,
+            661
+          ],
+          "class": "crooked_cap",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.946",
+          "reference_match": null,
+          "suggested_class": "crooked_cap",
+          "prediction_confidence": 0.9456,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G14.jpg"
+        },
+        {
+          "id": "G15",
+          "area": "good",
+          "position": 15,
+          "row": 5,
+          "column_from_right": 3,
+          "center": [
+            935.4,
+            695.8
+          ],
+          "bbox": [
+            897,
+            649,
+            977,
+            739
+          ],
+          "class": "crooked_cap",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.908",
+          "reference_match": null,
+          "suggested_class": "crooked_cap",
+          "prediction_confidence": 0.9083,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G15.jpg"
+        },
+        {
+          "id": "G16",
+          "area": "good",
+          "position": 16,
+          "row": 1,
+          "column_from_right": 4,
+          "center": [
+            878.8,
+            381.0
+          ],
+          "bbox": [
+            841,
+            334,
+            921,
+            424
+          ],
+          "class": "crooked_cap",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.856",
+          "reference_match": null,
+          "suggested_class": "crooked_cap",
+          "prediction_confidence": 0.8562,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G16.jpg"
+        },
+        {
+          "id": "G17",
+          "area": "good",
+          "position": 17,
+          "row": 2,
+          "column_from_right": 4,
+          "center": [
+            876.75,
+            459.55
+          ],
+          "bbox": [
+            839,
+            413,
+            919,
+            503
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G17.jpg"
+        },
+        {
+          "id": "G18",
+          "area": "good",
+          "position": 18,
+          "row": 3,
+          "column_from_right": 4,
+          "center": [
+            874.7,
+            538.1
+          ],
+          "bbox": [
+            837,
+            491,
+            917,
+            581
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G18.jpg"
+        },
+        {
+          "id": "G19",
+          "area": "good",
+          "position": 19,
+          "row": 4,
+          "column_from_right": 4,
+          "center": [
+            872.65,
+            616.65
+          ],
+          "bbox": [
+            835,
+            570,
+            915,
+            660
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G19.jpg"
+        },
+        {
+          "id": "G20",
+          "area": "good",
+          "position": 20,
+          "row": 5,
+          "column_from_right": 4,
+          "center": [
+            870.6,
+            695.2
+          ],
+          "bbox": [
+            833,
+            648,
+            913,
+            738
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G20.jpg"
+        },
+        {
+          "id": "G21",
+          "area": "good",
+          "position": 21,
+          "row": 1,
+          "column_from_right": 5,
+          "center": [
+            813.4,
+            379.0
+          ],
+          "bbox": [
+            775,
+            332,
+            855,
+            422
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G21.jpg"
+        },
+        {
+          "id": "G22",
+          "area": "good",
+          "position": 22,
+          "row": 2,
+          "column_from_right": 5,
+          "center": [
+            811.5,
+            457.9
+          ],
+          "bbox": [
+            774,
+            411,
+            854,
+            501
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.979",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.9788,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G22.jpg"
+        },
+        {
+          "id": "G23",
+          "area": "good",
+          "position": 23,
+          "row": 3,
+          "column_from_right": 5,
+          "center": [
+            809.6,
+            536.8
+          ],
+          "bbox": [
+            772,
+            490,
+            852,
+            580
+          ],
+          "class": "crooked_cap",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.950",
+          "reference_match": null,
+          "suggested_class": "crooked_cap",
+          "prediction_confidence": 0.9504,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/G23.jpg"
+        },
+        {
+          "id": "G24",
+          "area": "good",
+          "position": 24,
+          "row": 4,
+          "column_from_right": 5,
+          "center": [
+            807.7,
+            615.7
+          ],
+          "bbox": [
+            770,
+            569,
+            850,
+            659
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G24.jpg"
+        },
+        {
+          "id": "G25",
+          "area": "good",
+          "position": 25,
+          "row": 5,
+          "column_from_right": 5,
+          "center": [
+            805.8,
+            694.6
+          ],
+          "bbox": [
+            768,
+            648,
+            848,
+            738
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.793",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.793,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G25.jpg"
+        },
+        {
+          "id": "G26",
+          "area": "good",
+          "position": 26,
+          "row": 1,
+          "column_from_right": 6,
+          "center": [
+            748.0,
+            377.0
+          ],
+          "bbox": [
+            710,
+            330,
+            790,
+            420
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G26.jpg"
+        },
+        {
+          "id": "G27",
+          "area": "good",
+          "position": 27,
+          "row": 2,
+          "column_from_right": 6,
+          "center": [
+            746.25,
+            456.25
+          ],
+          "bbox": [
+            708,
+            409,
+            788,
+            499
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G27.jpg"
+        },
+        {
+          "id": "G28",
+          "area": "good",
+          "position": 28,
+          "row": 3,
+          "column_from_right": 6,
+          "center": [
+            744.5,
+            535.5
+          ],
+          "bbox": [
+            706,
+            488,
+            786,
+            578
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G28.jpg"
+        },
+        {
+          "id": "G29",
+          "area": "good",
+          "position": 29,
+          "row": 4,
+          "column_from_right": 6,
+          "center": [
+            742.75,
+            614.75
+          ],
+          "bbox": [
+            705,
+            568,
+            785,
+            658
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.960",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.96,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G29.jpg"
+        },
+        {
+          "id": "G30",
+          "area": "good",
+          "position": 30,
+          "row": 5,
+          "column_from_right": 6,
+          "center": [
+            741.0,
+            694.0
+          ],
+          "bbox": [
+            703,
+            647,
+            783,
+            737
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:cap_appearance; confidence=0.924",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.9241,
+          "prediction_source": "cap_appearance",
+          "crop_path": "tray_000122/crops/G30.jpg"
+        },
+        {
+          "id": "S01",
+          "area": "scrap",
+          "position": 1,
+          "row": 1,
+          "column_from_right": 1,
+          "center": [
+            1474.0,
+            617.0
+          ],
+          "bbox": [
+            1446,
+            583,
+            1617,
+            713
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S01.jpg"
+        },
+        {
+          "id": "S02",
+          "area": "scrap",
+          "position": 2,
+          "row": 2,
+          "column_from_right": 1,
+          "center": [
+            1469.5,
+            688.75
+          ],
+          "bbox": [
+            1442,
+            655,
+            1612,
+            785
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S02.jpg"
+        },
+        {
+          "id": "S03",
+          "area": "scrap",
+          "position": 3,
+          "row": 3,
+          "column_from_right": 1,
+          "center": [
+            1465.0,
+            760.5
+          ],
+          "bbox": [
+            1437,
+            726,
+            1608,
+            856
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S03.jpg"
+        },
+        {
+          "id": "S04",
+          "area": "scrap",
+          "position": 4,
+          "row": 4,
+          "column_from_right": 1,
+          "center": [
+            1460.5,
+            832.25
+          ],
+          "bbox": [
+            1432,
+            798,
+            1604,
+            928
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S04.jpg"
+        },
+        {
+          "id": "S05",
+          "area": "scrap",
+          "position": 5,
+          "row": 5,
+          "column_from_right": 1,
+          "center": [
+            1456.0,
+            904.0
+          ],
+          "bbox": [
+            1428,
+            870,
+            1599,
+            1000
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S05.jpg"
+        },
+        {
+          "id": "S06",
+          "area": "scrap",
+          "position": 6,
+          "row": 1,
+          "column_from_right": 2,
+          "center": [
+            1413.8,
+            616.0
+          ],
+          "bbox": [
+            1386,
+            582,
+            1557,
+            712
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S06.jpg"
+        },
+        {
+          "id": "S07",
+          "area": "scrap",
+          "position": 7,
+          "row": 2,
+          "column_from_right": 2,
+          "center": [
+            1409.4,
+            688.35
+          ],
+          "bbox": [
+            1381,
+            654,
+            1552,
+            784
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S07.jpg"
+        },
+        {
+          "id": "S08",
+          "area": "scrap",
+          "position": 8,
+          "row": 3,
+          "column_from_right": 2,
+          "center": [
+            1405.0,
+            760.7
+          ],
+          "bbox": [
+            1377,
+            727,
+            1548,
+            857
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S08.jpg"
+        },
+        {
+          "id": "S09",
+          "area": "scrap",
+          "position": 9,
+          "row": 4,
+          "column_from_right": 2,
+          "center": [
+            1400.6,
+            833.05
+          ],
+          "bbox": [
+            1373,
+            799,
+            1544,
+            929
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S09.jpg"
+        },
+        {
+          "id": "S10",
+          "area": "scrap",
+          "position": 10,
+          "row": 5,
+          "column_from_right": 2,
+          "center": [
+            1396.2,
+            905.4
+          ],
+          "bbox": [
+            1368,
+            871,
+            1539,
+            1001
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S10.jpg"
+        },
+        {
+          "id": "S11",
+          "area": "scrap",
+          "position": 11,
+          "row": 1,
+          "column_from_right": 3,
+          "center": [
+            1353.6,
+            615.0
+          ],
+          "bbox": [
+            1326,
+            581,
+            1497,
+            711
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S11.jpg"
+        },
+        {
+          "id": "S12",
+          "area": "scrap",
+          "position": 12,
+          "row": 2,
+          "column_from_right": 3,
+          "center": [
+            1349.3,
+            687.95
+          ],
+          "bbox": [
+            1321,
+            654,
+            1492,
+            784
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S12.jpg"
+        },
+        {
+          "id": "S13",
+          "area": "scrap",
+          "position": 13,
+          "row": 3,
+          "column_from_right": 3,
+          "center": [
+            1345.0,
+            760.9
+          ],
+          "bbox": [
+            1317,
+            727,
+            1488,
+            857
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:legacy_yolo; confidence=0.895",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.8948,
+          "prediction_source": "legacy_yolo",
+          "crop_path": "tray_000122/crops/S13.jpg"
+        },
+        {
+          "id": "S14",
+          "area": "scrap",
+          "position": 14,
+          "row": 4,
+          "column_from_right": 3,
+          "center": [
+            1340.7,
+            833.85
+          ],
+          "bbox": [
+            1313,
+            800,
+            1484,
+            930
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S14.jpg"
+        },
+        {
+          "id": "S15",
+          "area": "scrap",
+          "position": 15,
+          "row": 5,
+          "column_from_right": 3,
+          "center": [
+            1336.4,
+            906.8
+          ],
+          "bbox": [
+            1308,
+            873,
+            1479,
+            1003
+          ],
+          "class": "pass",
+          "presence": true,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.720",
+          "reference_match": null,
+          "suggested_class": "pass",
+          "prediction_confidence": 0.72,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S15.jpg"
+        },
+        {
+          "id": "S16",
+          "area": "scrap",
+          "position": 16,
+          "row": 1,
+          "column_from_right": 4,
+          "center": [
+            1293.4,
+            614.0
+          ],
+          "bbox": [
+            1265,
+            580,
+            1436,
+            710
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S16.jpg"
+        },
+        {
+          "id": "S17",
+          "area": "scrap",
+          "position": 17,
+          "row": 2,
+          "column_from_right": 4,
+          "center": [
+            1289.2,
+            687.55
+          ],
+          "bbox": [
+            1261,
+            654,
+            1432,
+            784
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S17.jpg"
+        },
+        {
+          "id": "S18",
+          "area": "scrap",
+          "position": 18,
+          "row": 3,
+          "column_from_right": 4,
+          "center": [
+            1285.0,
+            761.1
+          ],
+          "bbox": [
+            1257,
+            727,
+            1428,
+            857
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S18.jpg"
+        },
+        {
+          "id": "S19",
+          "area": "scrap",
+          "position": 19,
+          "row": 4,
+          "column_from_right": 4,
+          "center": [
+            1280.8,
+            834.65
+          ],
+          "bbox": [
+            1253,
+            801,
+            1424,
+            931
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S19.jpg"
+        },
+        {
+          "id": "S20",
+          "area": "scrap",
+          "position": 20,
+          "row": 5,
+          "column_from_right": 4,
+          "center": [
+            1276.6,
+            908.2
+          ],
+          "bbox": [
+            1249,
+            874,
+            1420,
+            1004
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S20.jpg"
+        },
+        {
+          "id": "S21",
+          "area": "scrap",
+          "position": 21,
+          "row": 1,
+          "column_from_right": 5,
+          "center": [
+            1233.2,
+            613.0
+          ],
+          "bbox": [
+            1205,
+            579,
+            1376,
+            709
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S21.jpg"
+        },
+        {
+          "id": "S22",
+          "area": "scrap",
+          "position": 22,
+          "row": 2,
+          "column_from_right": 5,
+          "center": [
+            1229.1,
+            687.15
+          ],
+          "bbox": [
+            1201,
+            653,
+            1372,
+            783
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S22.jpg"
+        },
+        {
+          "id": "S23",
+          "area": "scrap",
+          "position": 23,
+          "row": 3,
+          "column_from_right": 5,
+          "center": [
+            1225.0,
+            761.3
+          ],
+          "bbox": [
+            1197,
+            727,
+            1368,
+            857
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S23.jpg"
+        },
+        {
+          "id": "S24",
+          "area": "scrap",
+          "position": 24,
+          "row": 4,
+          "column_from_right": 5,
+          "center": [
+            1220.9,
+            835.45
+          ],
+          "bbox": [
+            1193,
+            801,
+            1364,
+            931
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S24.jpg"
+        },
+        {
+          "id": "S25",
+          "area": "scrap",
+          "position": 25,
+          "row": 5,
+          "column_from_right": 5,
+          "center": [
+            1216.8,
+            909.6
+          ],
+          "bbox": [
+            1189,
+            876,
+            1360,
+            1006
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S25.jpg"
+        },
+        {
+          "id": "S26",
+          "area": "scrap",
+          "position": 26,
+          "row": 1,
+          "column_from_right": 6,
+          "center": [
+            1173.0,
+            612.0
+          ],
+          "bbox": [
+            1145,
+            578,
+            1316,
+            708
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S26.jpg"
+        },
+        {
+          "id": "S27",
+          "area": "scrap",
+          "position": 27,
+          "row": 2,
+          "column_from_right": 6,
+          "center": [
+            1169.0,
+            686.75
+          ],
+          "bbox": [
+            1141,
+            653,
+            1312,
+            783
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S27.jpg"
+        },
+        {
+          "id": "S28",
+          "area": "scrap",
+          "position": 28,
+          "row": 3,
+          "column_from_right": 6,
+          "center": [
+            1165.0,
+            761.5
+          ],
+          "bbox": [
+            1137,
+            728,
+            1308,
+            858
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S28.jpg"
+        },
+        {
+          "id": "S29",
+          "area": "scrap",
+          "position": 29,
+          "row": 4,
+          "column_from_right": 6,
+          "center": [
+            1161.0,
+            836.25
+          ],
+          "bbox": [
+            1133,
+            802,
+            1304,
+            932
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S29.jpg"
+        },
+        {
+          "id": "S30",
+          "area": "scrap",
+          "position": 30,
+          "row": 5,
+          "column_from_right": 6,
+          "center": [
+            1157.0,
+            911.0
+          ],
+          "bbox": [
+            1129,
+            877,
+            1300,
+            1007
+          ],
+          "class": "no_vial",
+          "presence": false,
+          "review_status": "confirmed",
+          "reason": "auto:fill_sequence_appearance; confidence=0.820",
+          "reference_match": null,
+          "suggested_class": "no_vial",
+          "prediction_confidence": 0.82,
+          "prediction_source": "fill_sequence_appearance",
+          "crop_path": "tray_000122/crops/S30.jpg"
+        }
+      ],
+      "groups": {
+        "good": {
+          "occupied": 25,
+          "unknown_occupancy": 0,
+          "capacity": 30,
+          "last_observed_occupied_position": 30,
+          "expected_through": null,
+          "fill_boundary": 30,
+          "boundary_source": "visible_occupancy_lower_bound",
+          "missing_positions": [
+            3,
+            4,
+            5,
+            13,
+            22
+          ],
+          "not_yet_filled_positions": [],
+          "unknown_positions": [],
+          "visible_defect_positions": [
+            14,
+            15,
+            16,
+            23
+          ],
+          "full": false,
+          "needs_review": false,
+          "in_progress": false,
+          "findings": {
+            "complete_order": false,
+            "missing_vial": true,
+            "bad_misclassified_as_good": true
+          },
+          "positive_labels": [
+            "missing_vial",
+            "bad_misclassified_as_good"
+          ]
+        },
+        "scrap": {
+          "occupied": 14,
+          "unknown_occupancy": 0,
+          "capacity": 30,
+          "last_observed_occupied_position": 15,
+          "expected_through": null,
+          "fill_boundary": 15,
+          "boundary_source": "visible_occupancy_lower_bound",
+          "missing_positions": [
+            13
+          ],
+          "not_yet_filled_positions": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "unknown_positions": [],
+          "visible_defect_positions": [],
+          "full": false,
+          "needs_review": false,
+          "visually_passing_scrap_positions": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "suspected_misroute_positions": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "upstream_confirmed_misroute_positions": [],
+          "upstream_unverified_positions": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "visible_pattern_ok": false,
+          "findings": {
+            "no_problems": false,
+            "missing_vial": true,
+            "good_misclassified_as_bad": null,
+            "full": false
+          },
+          "positive_labels": [
+            "missing_vial"
+          ]
+        }
+      }
+    }
+  ]
+}
