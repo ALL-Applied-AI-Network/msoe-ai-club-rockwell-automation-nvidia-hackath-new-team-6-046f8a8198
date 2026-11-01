@@ -113,6 +113,47 @@ on Validation, then pass the selected `--defect-threshold` to one Testing run.
 The selected project profile is stored in `two_stage_profile.json`; use
 `--threshold-profile two_stage_profile.json` for repeatable inference.
 
+## Run auditable tray inference
+
+`infer_tray.py` performs leakage-free inference without dataset YOLO labels. It
+uses the two-stage model on G01-G30, the existing appearance/fill fallback for
+S01-S30, and the supplied three-valued inspection rules for the tray verdict:
+
+```bash
+python infer_tray.py \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --images ../../project/tray-inspection-detection-dataset/images/Testing \
+  --files tray_000012.jpg tray_000013.jpg \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --model output/two-stage-v1 \
+  --threshold-profile two_stage_profile.json \
+  --output output/inference-demo-v1
+```
+
+The command exports `results.json`, a position-level CSV, and a tray summary
+CSV. Scrap routing is intentionally left unresolved unless an upstream
+position-level verdict is available; a visually passing scrap vial alone does
+not prove a routing error.
+
+Because a tray fails when any of 30 good positions is defective, calibrate a
+separate tray threshold against Validation-level `complete_order` and
+`incomplete_order` labels to audit whether score aggregation is viable:
+
+```bash
+python calibrate_tray_verdict.py \
+  --model output/two-stage-v1 \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --images ../../project/tray-inspection-detection-dataset/images/Validation \
+  --verdicts ../../project/tray-inspection-detection-dataset/tray_verdicts.csv \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --output output/tray-threshold-v1.json --tune
+```
+
+For the current HOG/SVM model this audit fails: the Validation-selected maximum
+score threshold has only 15.2% incomplete-order recall on Testing. Do not use
+that experimental threshold for deployment. `two_stage_profile.json` remains
+the supported position-level profile, and its tray verdict is conservative.
+
 ## Check the real-image domain gap
 
 `evaluate_real.py` applies the synthetic-trained model to calibrated crops from

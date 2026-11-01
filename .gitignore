@@ -70,5 +70,6 @@ __pycache__/
 
 # Local review products and temporary render/audit files
 tmp/
+.deck-build/
 vial-inspection/**/review-*/
 vial-inspection/**/calibration-check/

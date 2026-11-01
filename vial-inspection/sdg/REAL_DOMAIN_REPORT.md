@@ -118,3 +118,20 @@ The two-stage gate reduces false defect alarms while retaining most defect
 performance, at the cost of five percentage points of crooked-cap agreement.
 The selected threshold and evaluation provenance are versioned in
 `two_stage_profile.json`.
+
+## Tray-level aggregation audit
+
+Applying “any predicted defect means incomplete order” compounds position-level
+false alarms across 30 slots. A maximum-gate-score threshold was therefore
+selected on the 35 Validation trays. Only two Validation trays were complete;
+the selected threshold achieved 65.2% balanced accuracy but detected just
+30.3% of incomplete trays.
+
+The locked threshold failed on the 70 Testing trays: 17.1% overall accuracy,
+32.6% balanced accuracy, 50% complete-order recall, and only 15.2%
+incomplete-order recall. It is not a deployable threshold and is deliberately
+not included as a selected project profile. The auditable inference command
+keeps the conservative inspection-rule verdict until a genuine tray-level
+model can be trained. A future tray model needs aggregated score-distribution
+features and more complete-order training examples; maximum score alone is not
+separable on this dataset.
