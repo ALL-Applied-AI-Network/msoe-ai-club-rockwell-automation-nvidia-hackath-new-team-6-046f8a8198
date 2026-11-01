@@ -51,3 +51,38 @@ metadata.
 Splitting is performed by scene, never by crop, to prevent near-identical crops
 from the same render leaking between training and validation. Generated output
 is excluded by the repository `.gitignore`.
+
+## Export crops for classifier training
+
+After generation completes, validate the dataset and create a standard
+`split/class/image.png` ImageFolder layout:
+
+```bash
+python export_dataset.py \
+  --dataset-root output/dataset-v1 \
+  --output output/classification-v1 \
+  --areas good
+```
+
+The default `good` policy exports only G01-G30, which are balanced at six
+examples per class per scene. Use `--areas all` only when the training plan
+intentionally includes the scrap tray's 30 additional `no_vial` positions.
+The exporter verifies every scene-label hash and records each crop hash in
+`manifest.csv`.
+
+## Train the first baseline
+
+The dependency-light baseline uses 64-pixel grayscale HOG features and an
+OpenCV linear multiclass SVM. It writes a model plus accuracy, macro-F1,
+per-class scores, and a confusion matrix:
+
+```bash
+python train_baseline.py \
+  --dataset-root output/classification-v1 \
+  --output output/baseline-v1 \
+  --seed 2026
+```
+
+This baseline is an early data/pipeline diagnostic. The intended production
+model remains a transfer-learned image classifier evaluated against real,
+held-out inspection images.
