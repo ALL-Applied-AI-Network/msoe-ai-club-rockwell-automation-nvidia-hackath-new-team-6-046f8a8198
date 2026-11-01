@@ -145,7 +145,10 @@ def render_annotated(image, result, destination):
     overlay = canvas.copy()
     cv2.rectangle(overlay, (0, 0), (width, min(height, 108)), (0, 0, 0), -1)
     cv2.addWeighted(overlay, 0.72, canvas, 0.28, 0, canvas)
-    model_verdict = result.get("tray_verdict", "unresolved").replace("_", " ").upper()
+    service = result.get("service", {})
+    displayed_verdict = service.get(
+        "session_tray_verdict", result.get("tray_verdict", "unresolved"))
+    model_verdict = displayed_verdict.replace("_", " ").upper()
     rule_verdict = result.get("rule_tray_verdict", "unresolved").replace("_", " ")
     profile = result.get("alignment", {}).get("profile", "unknown")
     cv2.putText(canvas, f"{result['filename']}  |  MODEL: {model_verdict}",
@@ -156,6 +159,10 @@ def render_annotated(image, result, destination):
     if gate is not None:
         gate_text = (f"  |  Gate: {gate['complete_margin']:.3f} / "
                      f"{gate['complete_margin_threshold']:.3f}")
+    if service.get("session_confirmation"):
+        gate_text += (f"  |  Session: {service['tray_id']} "
+                      f"frame {service['session_frame_count']} "
+                      f"{service['route_action'].upper()}")
     cv2.putText(canvas, f"Rules: {rule_verdict}  |  Calibration: {profile}{gate_text}",
                 (20, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.58,
                 (225, 225, 225), 1, cv2.LINE_AA)
@@ -177,10 +184,14 @@ def render_annotated(image, result, destination):
 
 def write_html_report(results, destination):
     """Write a portable, dependency-free visual summary of inference results."""
-    verdict_counts = Counter(result["tray_verdict"] for result in results)
+    def display_verdict(result):
+        return result.get("service", {}).get(
+            "session_tray_verdict", result["tray_verdict"])
+
+    verdict_counts = Counter(display_verdict(result) for result in results)
     cards = []
     for result in results:
-        verdict = result["tray_verdict"]
+        verdict = display_verdict(result)
         css_verdict = verdict if verdict in VERDICTS else "unresolved"
         counts = Counter(slot["class"] for slot in result["slots"])
         chips = "".join(
@@ -199,6 +210,14 @@ def write_html_report(results, destination):
                 f' &nbsp; <strong>Complete margin:</strong> '
                 f'{gate["complete_margin"]:.3f} / '
                 f'{gate["complete_margin_threshold"]:.3f}'
+            )
+        service = result.get("service", {})
+        if service.get("session_confirmation"):
+            gate_html += (
+                f' &nbsp; <strong>Tray session:</strong> '
+                f'{escape(str(service["tray_id"]))} '
+                f'({service["session_frame_count"]} frames; '
+                f'frame {escape(result["tray_verdict"].replace("_", " "))})'
             )
         cards.append(f"""
         <article class="tray-card">
@@ -415,16 +434,21 @@ class InspectionEngine:
 def result_rows(result):
     """Create the stable tray and position CSV rows for one result."""
     counts = Counter(slot["class"] for slot in result["slots"])
+    service = result.get("service", {})
     summary = {
         "filename": result["filename"],
-        "tray_verdict": result["tray_verdict"],
+        "tray_verdict": service.get(
+            "session_tray_verdict", result["tray_verdict"]),
+        "frame_tray_verdict": result["tray_verdict"],
         "tray_model_verdict": result.get("tray_model_verdict"),
         "rule_tray_verdict": result["rule_tray_verdict"],
         "complete_margin": result.get("tray_confidence_gate", {}).get(
             "complete_margin"),
         "complete_margin_threshold": result.get(
             "tray_confidence_gate", {}).get("complete_margin_threshold"),
-        "route_action": result.get("service", {}).get("route_action"),
+        "route_action": service.get("route_action"),
+        "tray_id": service.get("tray_id"),
+        "session_frame_count": service.get("session_frame_count"),
         "good_complete_order": result["groups"]["good"]["findings"][
             "complete_order"],
         "good_missing_vial": result["groups"]["good"]["findings"][

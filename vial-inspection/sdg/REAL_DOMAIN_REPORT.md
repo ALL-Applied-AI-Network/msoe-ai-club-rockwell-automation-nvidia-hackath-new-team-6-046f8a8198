@@ -166,3 +166,20 @@ neither clears the zero-false-accept threshold. A genuinely independent
 acquisition is still required before deployment.
 The selected configuration and caveat are versioned in
 `tray_classifier_profile.json`.
+
+## Multi-frame runtime mitigation
+
+The inspection service can group camera frames by physical tray ID without
+lowering the locked single-frame confidence gate. Any incomplete frame rejects
+the session immediately. A session is accepted only after at least three
+frames, when every base tray prediction is complete-like and at least one frame
+clears the confidence gate. All other sessions remain on hold.
+
+A controlled replay exercised all three routes. Frames `tray_000108`,
+`tray_000109`, and `tray_000112` formed a complete sequence and were accepted
+on frame three; the additional `tray_000117` frame was ignored after session
+finalization. A known incomplete frame was rejected immediately. The former
+false-accept frames `tray_000063`, `tray_000092`, and `tray_000194` remained on
+hold because none cleared the gate. This replay verifies the state machine, not
+a new independent accuracy result: production acceptance still requires tray
+IDs from the capture system and an independent multi-tray session evaluation.

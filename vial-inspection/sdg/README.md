@@ -180,6 +180,27 @@ images, and `report.html` are refreshed after successful inspections. Failed
 images are isolated under `errors/` without stopping the watcher. Use `--once`
 to process the current queue and exit.
 
+For fail-safe multi-frame confirmation, name frames
+`<tray-id>__<frame-id>.jpg` and enable session mode:
+
+```bash
+python inspection_service.py \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --bundle output/deployment-bundle-v1 \
+  --input output/incoming \
+  --output output/live-inspection \
+  --confirm-sessions --minimum-session-frames 3
+```
+
+A `vial-inspection-frame-1` JSON sidecar with a `tray_id` may be used instead
+of the filename convention. A session rejects immediately if any frame is
+`incomplete_order`. It accepts only after the minimum frame count, when every
+base tray prediction is complete-like and at least one frame clears the locked
+confidence gate. All other sessions remain on `hold`; the single-frame gate is
+never lowered. Accept and reject decisions finalize the tray ID, so subsequent
+frames require a new ID. Aggregate session decisions are exported as
+`sessions.json` and `sessions.csv` alongside the frame-level audit products.
+
 Because a tray fails when any of 30 good positions is defective, calibrate a
 separate tray threshold against Validation-level `complete_order` and
 `incomplete_order` labels to audit whether score aggregation is viable:

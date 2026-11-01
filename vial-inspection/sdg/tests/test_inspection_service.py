@@ -68,3 +68,38 @@ def test_route_actions_are_fail_safe():
     assert MODULE.route_action("unresolved") == "hold"
     with pytest.raises(ValueError, match="unsupported tray verdict"):
         MODULE.route_action("unknown")
+
+
+def frame(verdict, model="complete_order"):
+    return {"tray_verdict": verdict, "tray_model_verdict": model}
+
+
+def test_session_consensus_accepts_only_confirmed_complete_sequence():
+    frames = [frame("unresolved"), frame("unresolved"),
+              frame("complete_order")]
+    assert MODULE.session_decision(frames[:2], 3) == "unresolved"
+    assert MODULE.session_decision(frames, 3) == "complete_order"
+
+
+def test_session_consensus_rejects_any_incomplete_and_holds_weak_sequence():
+    assert MODULE.session_decision([
+        frame("unresolved"), frame("incomplete_order", "incomplete_order")
+    ], 3) == "incomplete_order"
+    assert MODULE.session_decision([
+        frame("unresolved"), frame("unresolved"), frame("unresolved")
+    ], 3) == "unresolved"
+
+
+def test_tray_id_comes_from_filename_or_sidecar(tmp_path):
+    policy = MODULE.session_policy(True, 3, "__")
+    named = tmp_path/"tray-A__frame-001.jpg"
+    named.write_bytes(b"image")
+    assert MODULE.tray_id_from_path(named, policy) == "tray-A"
+
+    sidecar_image = tmp_path/"camera-frame.jpg"
+    sidecar_image.write_bytes(b"image")
+    sidecar_image.with_suffix(".json").write_text(json.dumps({
+        "schema_version": "vial-inspection-frame-1",
+        "tray_id": "physical-tray-7",
+    }))
+    assert MODULE.tray_id_from_path(sidecar_image, policy) == "physical-tray-7"
