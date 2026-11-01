@@ -1,0 +1,94 @@
+#usda 1.0
+(
+    defaultPrim = "CSI_Line"
+    metersPerUnit = 1
+    upAxis = "Z"
+    framesPerSecond = 30
+    timeCodesPerSecond = 30
+    startTimeCode = 1
+    endTimeCode = 686
+)
+
+def Xform "CSI_Line"
+{
+    def Xform "Facility" (
+        prepend references = @stations/facility/facility.usdc@
+    )
+    {
+    }
+
+    def Xform "MagneMover" (
+        prepend references = @stations/magnemover/magnemover.usdc@
+    )
+    {
+    }
+
+    def Xform "TrayInspection" (
+        prepend references = @stations/tray_inspection/tray_inspection.usdc@
+    )
+    {
+    }
+
+    def Xform "FillStation" (
+        prepend references = @stations/fill_station/fill_station.usda@
+    )
+    {
+        matrix4d xformOp:transform = ( (-1.94707198e-07, -1, 0, 0), (1, -1.94707198e-07, 0, 0), (0, 0, 1, 0), (3.4671011, 4.34847975, -0.133739412, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        over "env_light" (
+            active = false
+        )
+        {
+        }
+
+        over "FillStation_LocalRoot"
+        {
+            over "CAD_MagneMover_00" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_01" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_02" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_03" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_04" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_05" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_06" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_07" (
+                active = false
+            )
+            {
+            }
+            over "CAD_MagneMover_08" (
+                active = false
+            )
+            {
+            }
+        }
+    }
+}

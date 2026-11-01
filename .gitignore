@@ -1,0 +1,72 @@
+# Local command/audit record
+COMMAND_LOG.md
+
+# Downloaded and generated datasets
+data/
+datasets/
+project/datasets/
+vial-inspection/tray-inspection-detection-dataset-*/
+*.arrow
+*.parquet
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.lmdb
+*.record
+*.tfrecord
+
+# Training outputs, checkpoints, and experiment caches
+results/
+project/results/
+outputs/
+training-export*/
+checkpoints/
+checkpoint-*/
+wandb/
+mlruns/
+lightning_logs/
+runs/
+events.out.tfevents.*
+
+# Model weights and optimized inference artifacts
+weights/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.gguf
+*.ggml
+*.onnx
+*.onnx_data
+*.engine
+*.plan
+*.trt
+*.tflite
+*.pt2
+*.pb
+*.pkl
+*.joblib
+
+# Large binary simulation geometry (keep USDA composition/configuration files)
+*.usdc
+
+# Large packaged artifacts
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# Common model/dataset caches
+.cache/
+.huggingface/
+__pycache__/
+*.py[cod]
+
+# Local review products and temporary render/audit files
+tmp/
+vial-inspection/**/review-*/
+vial-inspection/**/calibration-check/

@@ -1,0 +1,29 @@
+{
+  "canonical_classes": [
+    "pass",
+    "missing_cap",
+    "crooked_cap",
+    "damaged_vial",
+    "no_vial"
+  ],
+  "labeler_to_canonical": {
+    "pass": "pass",
+    "missing_cap": "missing_cap",
+    "crooked_cap": "crooked_cap",
+    "damaged_vial": "damaged_vial",
+    "no_vial": "no_vial"
+  },
+  "legacy_detection_to_canonical": {
+    "missing_cap": "missing_cap",
+    "crooked_cap": "crooked_cap",
+    "damaged": "damaged_vial",
+    "missing_vial": "no_vial"
+  },
+  "fixture_level_only": [
+    "complete_order",
+    "incomplete_order",
+    "vial_in_wrong_tray"
+  ],
+  "notes": "Fixture-level labels are intentionally excluded from position-class training. Legacy defect boxes may be mapped only when their target position is known or separately validated."
+}
+
