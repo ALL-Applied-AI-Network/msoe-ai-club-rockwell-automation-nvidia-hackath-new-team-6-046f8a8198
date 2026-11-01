@@ -119,15 +119,27 @@ The selected project profile is stored in `two_stage_profile.json`; use
 uses the two-stage model on G01-G30, the existing appearance/fill fallback for
 S01-S30, and the supplied three-valued inspection rules for the tray verdict:
 
+Package the selected position model, tray model, threshold, and calibration
+into one self-verifying deployment directory:
+
+```bash
+python package_model.py \
+  --position-model output/two-stage-v1 \
+  --tray-model output/tray-classifier-v1 \
+  --threshold-profile two_stage_profile.json \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --output output/deployment-bundle-v1
+```
+
+The bundle contains a SHA-256 manifest and is ignored by Git along with all
+model weights. Inference verifies every declared file before loading a model:
+
 ```bash
 python infer_tray.py \
   --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
   --images ../../project/tray-inspection-detection-dataset/images/Testing \
   --files tray_000012.jpg tray_000013.jpg \
-  --calibration ../labeler_extensions/calibration/calibration.json \
-  --model output/two-stage-v1 \
-  --tray-model output/tray-classifier-v1 \
-  --threshold-profile two_stage_profile.json \
+  --bundle output/deployment-bundle-v1 \
   --output output/inference-demo-v1
 ```
 
@@ -137,6 +149,10 @@ conservative inspection-rule verdict are retained. Scrap routing is
 intentionally left unresolved unless an upstream
 position-level verdict is available; a visually passing scrap vial alone does
 not prove a routing error.
+
+For development, the original `--model`, `--tray-model`, `--calibration`, and
+`--threshold-profile` arguments remain available. Use `--bundle` for demos and
+deployment so configuration and weights cannot be accidentally mixed.
 
 Because a tray fails when any of 30 good positions is defective, calibrate a
 separate tray threshold against Validation-level `complete_order` and

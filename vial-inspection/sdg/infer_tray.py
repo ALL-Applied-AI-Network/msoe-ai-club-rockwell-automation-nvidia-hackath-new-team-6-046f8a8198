@@ -15,11 +15,70 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from evaluate_real_dataset import CLASSES, extract_feature, load_predictor, predict
+from package_model import BUNDLE_SCHEMA, COMPONENTS
 from train_tray_classifier import VERDICTS, tray_feature_vector
 
 
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def resolve_bundle(bundle):
+    """Verify a deployment bundle and return its absolute component paths."""
+    bundle = Path(bundle).resolve()
+    manifest_path = bundle/"manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"invalid bundle manifest: {exc}") from exc
+    if manifest.get("schema_version") != BUNDLE_SCHEMA:
+        raise ValueError("unsupported bundle schema")
+    declared = manifest.get("components")
+    if not isinstance(declared, dict):
+        raise ValueError("bundle manifest has no component map")
+
+    resolved = {}
+    for name, expected_relative in COMPONENTS.items():
+        entry = declared.get(name)
+        if not isinstance(entry, dict) or entry.get("path") != expected_relative:
+            raise ValueError(f"bundle component {name!r} is missing or misrouted")
+    for name, entry in declared.items():
+        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
+            raise ValueError(f"bundle component {name!r} is invalid")
+        relative = Path(entry["path"])
+        if relative.is_absolute():
+            raise ValueError(f"bundle component {name!r} has an absolute path")
+        path = (bundle/relative).resolve()
+        try:
+            path.relative_to(bundle)
+        except ValueError as exc:
+            raise ValueError(f"bundle component {name!r} escapes bundle root") from exc
+        if not path.is_file():
+            raise ValueError(f"bundle component {name!r} is missing")
+        if path.stat().st_size != entry.get("bytes"):
+            raise ValueError(f"bundle component {name!r} has the wrong size")
+        if sha256(path) != entry.get("sha256"):
+            raise ValueError(f"bundle component {name!r} failed SHA-256 verification")
+        resolved[name] = path
+
+    calibration = json.loads(resolved["calibration"].read_text(encoding="utf-8"))
+    declared_paths = {entry["path"]: name for name, entry in declared.items()}
+    if len(declared_paths) != len(declared):
+        raise ValueError("bundle manifest declares duplicate component paths")
+    for profile in calibration.get("profiles", []):
+        reference_name = profile.get("reference_image")
+        if (not isinstance(reference_name, str) or
+                Path(reference_name).name != reference_name):
+            raise ValueError("bundle calibration has an invalid reference image")
+        relative = f"config/examples/{reference_name}"
+        component = declared_paths.get(relative)
+        if component is None:
+            raise ValueError(f"bundle calibration reference {reference_name!r} is missing")
+        if sha256(resolved[component]) != profile.get("reference_sha256"):
+            raise ValueError(f"bundle calibration reference {reference_name!r} has the wrong hash")
+    resolved["manifest"] = manifest_path
+    resolved["manifest_sha256"] = sha256(manifest_path)
+    return resolved
 
 
 def load_module(name, path):
@@ -45,10 +104,13 @@ def main():
     parser.add_argument("--labeler", required=True, type=Path)
     parser.add_argument("--images", required=True, type=Path)
     parser.add_argument("--files", required=True, nargs="+")
-    parser.add_argument("--calibration", required=True, type=Path)
-    parser.add_argument("--model", required=True, type=Path,
-                        help="two-stage model directory")
-    parser.add_argument("--threshold-profile", required=True, type=Path)
+    deployment = parser.add_mutually_exclusive_group(required=True)
+    deployment.add_argument("--bundle", type=Path,
+                            help="verified bundle created by package_model.py")
+    deployment.add_argument("--model", type=Path,
+                            help="two-stage model directory")
+    parser.add_argument("--calibration", type=Path)
+    parser.add_argument("--threshold-profile", type=Path)
     parser.add_argument("--tray-model", type=Path,
                         help="optional trained tray classifier directory")
     parser.add_argument("--output", required=True, type=Path)
@@ -59,6 +121,22 @@ def main():
         parser.error("output already exists; choose a new directory")
     if any(Path(name).name != name for name in args.files):
         parser.error("files must be image basenames")
+    bundle = None
+    if args.bundle is not None:
+        if any(value is not None for value in
+               (args.calibration, args.threshold_profile, args.tray_model)):
+            parser.error("bundle cannot be combined with calibration, threshold-profile, or tray-model")
+        try:
+            bundle = resolve_bundle(args.bundle)
+        except ValueError as exc:
+            parser.error(str(exc))
+        args.model = bundle["position_metadata"].parent
+        args.threshold_profile = bundle["threshold_profile"]
+        args.tray_model = bundle["tray_metadata"].parent
+        args.calibration = bundle["calibration"]
+    elif args.calibration is None or args.threshold_profile is None:
+        parser.error("direct model mode requires calibration and threshold-profile")
+
     profile = json.loads(args.threshold_profile.read_text())
     if profile.get("schema_version") not in {"vial-two-stage-threshold-1",
                                               "vial-tray-threshold-1"}:
@@ -144,6 +222,11 @@ def main():
                                "stage2_sha256": sha256(args.model/"stage2.yml"),
                                "threshold_profile_sha256": sha256(args.threshold_profile),
                                "defect_threshold": threshold}
+            if bundle is not None:
+                result["bundle"] = {
+                    "schema_version": BUNDLE_SCHEMA,
+                    "manifest_sha256": bundle["manifest_sha256"],
+                }
             results.append(result)
             counts = Counter(slot["class"] for slot in result["slots"])
             summary_rows.append({"filename": path.name, "tray_verdict": result["tray_verdict"],
