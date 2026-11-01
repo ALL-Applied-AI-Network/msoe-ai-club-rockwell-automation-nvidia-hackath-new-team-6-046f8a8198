@@ -60,6 +60,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--c", type=float, default=2.0)
+    parser.add_argument("--pass-weight", type=float, default=1.0,
+                        help="relative SVM cost for misclassifying pass examples")
     args = parser.parse_args()
     metadata = [json.loads((root/"dataset.json").read_text()) for root in args.dataset_root]
     classes = metadata[0]["classes"]
@@ -86,6 +88,10 @@ def main():
     svm.setType(cv2.ml.SVM_C_SVC)
     svm.setKernel(cv2.ml.SVM_LINEAR)
     svm.setC(args.c)
+    if args.pass_weight <= 0:
+        parser.error("pass-weight must be positive")
+    svm.setClassWeights(np.asarray([args.pass_weight, 1.0, 1.0, 1.0, 1.0],
+                                   dtype=np.float32))
     svm.setTermCriteria((cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 2000, 1e-6))
     svm.train(partitions["train"][0], cv2.ml.ROW_SAMPLE, partitions["train"][1])
     _, prediction = svm.predict(partitions["val"][0])
@@ -96,7 +102,7 @@ def main():
     for name, values in zip(classes, per_class):
         values["class"] = name
     report = {"schema_version": "vial-baseline-1", "model": "opencv-hog-linear-svm",
-              "seed": args.seed, "c": args.c,
+              "seed": args.seed, "c": args.c, "pass_weight": args.pass_weight,
               "train_samples": int(len(partitions["train"][1])),
               "val_samples": int(len(actual)), "classes": classes,
               "dataset_roots": [str(root.resolve()) for root in args.dataset_root],

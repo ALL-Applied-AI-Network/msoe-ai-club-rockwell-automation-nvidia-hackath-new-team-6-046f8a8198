@@ -96,6 +96,9 @@ python train_baseline.py \
   --output output/hybrid-baseline-v1 --seed 2026
 ```
 
+Use `--pass-weight` to tune the false-defect cost on a real validation split.
+Choose the value using Validation only, then report Testing once.
+
 ## Check the real-image domain gap
 
 `evaluate_real.py` applies the synthetic-trained model to calibrated crops from
@@ -132,3 +135,21 @@ python build_real_pseudo_dataset.py \
 The output remains pseudo-labeled data, not certified ground truth. Balancing
 and image-level splitting prevent the dominant pass class and neighboring crops
 from making the validation result look artificially strong.
+
+## Evaluate untouched real splits
+
+`evaluate_real_dataset.py` runs the same calibrated mapping over an entire
+unused Validation or Testing image directory and reports both overall and
+macro-per-class agreement. Use the hybrid model and exclude any calibration
+images used by earlier diagnostics:
+
+```bash
+python evaluate_real_dataset.py \
+  --model output/hybrid-baseline-v1/model.yml \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --images ../../project/tray-inspection-detection-dataset/images/Testing \
+  --detections-root ../../project/tray-inspection-detection-dataset/labels \
+  --calibration ../labeler_extensions/calibration/calibration.json \
+  --output output/testing-agreement-v1.json \
+  --exclude tray_000250.jpg tray_000271.jpg --min-confidence 0.90
+```

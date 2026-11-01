@@ -66,3 +66,34 @@ The bright-lower regime is now the clearest residual gap. The next data cycle
 should emphasize bright-lower pass examples and independently held-out real
 missing-cap and damaged-vial examples. These figures still measure agreement
 with pseudo-labels, not certified ground-truth accuracy.
+
+## Untouched split evaluation
+
+The hybrid model was subsequently evaluated on the original real Validation
+and Testing splits. The two Testing calibration images were excluded, and only
+fixture mappings with confidence of at least 0.90 were retained.
+
+| Split | Images | Positions | Overall agreement | Macro class agreement |
+| --- | ---: | ---: | ---: | ---: |
+| Validation | 35 | 866 | 63.5% | 83.0% |
+| Testing | 68 | 1,704 | 66.3% | 86.0% |
+
+| Class | Validation | Testing |
+| --- | ---: | ---: |
+| pass | 59% (737) | 64% (1,565) |
+| missing_cap | 98% (51) | 96% (51) |
+| crooked_cap | 76% (58) | 77% (53) |
+| damaged_vial | 100% (9) | 100% (9) |
+| no_vial | 82% (11) | 92% (26) |
+
+The primary remaining error is false defect alarms on real pass positions. The
+balanced training distribution is intentionally unlike the highly pass-heavy
+operating distribution. Pass-class cost or decision-threshold calibration must
+therefore be selected on Validation before a final Testing measurement. The
+small damaged-vial and no-vial supports should still be treated cautiously.
+
+Pass-class SVM weights of 2 and 3 were tried using Validation only. Both
+produced the same 63.5% overall and 83.0% macro agreement as weight 1, so the
+unweighted hybrid remains the selected baseline. No additional Testing tuning
+was performed. The false-positive reduction needs more varied real pass crops
+or a two-stage pass/defect model rather than a class-cost change.
