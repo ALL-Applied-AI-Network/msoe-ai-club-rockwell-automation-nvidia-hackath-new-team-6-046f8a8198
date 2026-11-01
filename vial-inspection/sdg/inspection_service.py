@@ -463,7 +463,8 @@ class InspectionService:
         for path in discover_images(self.input_dir):
             outcome = self.process_image(path)
             counts[outcome] += 1
-            print(f"SERVICE {outcome.upper()} {path.name}", flush=True)
+            if outcome in {"processed", "failed"}:
+                print(f"SERVICE {outcome.upper()} {path.name}", flush=True)
         return counts
 
 
