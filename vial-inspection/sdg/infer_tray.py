@@ -9,6 +9,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import tempfile
 from urllib.parse import quote
 
 import cv2
@@ -262,6 +263,188 @@ def write_html_report(results, destination):
     Path(destination).write_text(document, encoding="utf-8")
 
 
+class InspectionEngine:
+    """Reusable inference engine that loads all model artifacts exactly once."""
+
+    def __init__(self, labeler_path, calibration, model, threshold_profile,
+                 tray_model=None, bundle=None):
+        self.calibration = Path(calibration)
+        self.model_path = Path(model)
+        self.threshold_profile = Path(threshold_profile)
+        self.tray_model_path = Path(tray_model) if tray_model is not None else None
+        self.bundle = bundle
+
+        profile = json.loads(self.threshold_profile.read_text())
+        if profile.get("schema_version") not in {
+                "vial-two-stage-threshold-1", "vial-tray-threshold-1"}:
+            raise ValueError("unsupported threshold profile")
+        self.threshold = float(profile["defect_threshold"])
+        self.predictor = load_predictor(self.model_path, self.threshold)
+        if self.predictor["kind"] != "two_stage":
+            raise ValueError("model must be a two-stage model directory")
+
+        self.tray_model = self.tray_scaler = self.tray_metadata = self.tray_gate = None
+        self.tray_model_provenance = None
+        if self.tray_model_path is not None:
+            self.tray_metadata = json.loads(
+                (self.tray_model_path/"metrics.json").read_text())
+            if self.tray_metadata.get("schema_version") != "vial-tray-classifier-2":
+                raise ValueError("unsupported tray classifier")
+            self.tray_gate = self.tray_metadata.get("confidence_gate")
+            if (not isinstance(self.tray_gate, dict) or
+                    self.tray_gate.get("schema_version") !=
+                    "vial-tray-confidence-gate-1"):
+                raise ValueError("tray classifier has no supported confidence gate")
+            self.tray_model = cv2.ml.SVM_load(
+                str(self.tray_model_path/"model.yml"))
+            with np.load(self.tray_model_path/"scaler.npz") as values:
+                self.tray_scaler = (values["mean"], values["std"])
+            self.tray_model_provenance = {
+                "feature_set": self.tray_metadata["feature_set"],
+                "model_sha256": sha256(self.tray_model_path/"model.yml"),
+                "scaler_sha256": sha256(self.tray_model_path/"scaler.npz"),
+            }
+
+        self.labeler = load_module("vial_inference_labeler", labeler_path)
+        self.prediction_module = __import__("prediction")
+        self.rules = __import__("rules")
+        self.hog = cv2.HOGDescriptor(
+            (64, 64), (16, 16), (8, 8), (8, 8), 9)
+        temporary = tempfile.NamedTemporaryFile(
+            prefix="vial-empty-detections-", suffix=".txt", delete=False)
+        temporary.close()
+        self.empty_yolo = Path(temporary.name)
+        self.model_provenance = {
+            "directory": str(self.model_path.resolve()),
+            "stage1_sha256": sha256(self.model_path/"stage1.yml"),
+            "stage2_sha256": sha256(self.model_path/"stage2.yml"),
+            "threshold_profile_sha256": sha256(self.threshold_profile),
+            "defect_threshold": self.threshold,
+        }
+
+    def close(self):
+        self.empty_yolo.unlink(missing_ok=True)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, _type, _value, _traceback):
+        self.close()
+
+    def inspect(self, path, good_expected_through=30,
+                scrap_expected_through=None):
+        path = Path(path)
+        prepared, _ = self.labeler.prepare([path], self.calibration)
+        result = prepared[0]
+        with Image.open(path) as source:
+            pil_image = source.convert("RGB")
+            # Empty detections intentionally activate appearance/fill fallback only.
+            self.prediction_module.predict(
+                result, pil_image, self.empty_yolo, auto_confirm=False)
+        image = cv2.imread(str(path), cv2.IMREAD_COLOR)
+        if image is None:
+            raise ValueError(f"cannot decode image: {path}")
+        good = [slot for slot in result["slots"] if slot["id"].startswith("G")]
+        features = np.asarray(
+            [extract_feature(image, slot["bbox"], self.hog) for slot in good],
+            dtype=np.float32)
+        predicted, scores, defect_ids = predict(self.predictor, features)
+        for index, (slot, class_id) in enumerate(zip(good, predicted)):
+            label = CLASSES[int(class_id)]
+            slot.update({
+                "class": label, "presence": label != "no_vial",
+                "suggested_class": label, "review_status": "predicted",
+                "prediction_source": "two_stage_hog_svm",
+                "prediction_confidence": None,
+                "defect_score": round(float(scores[index]), 8),
+                "defect_threshold": self.threshold,
+                "defect_candidate": CLASSES[int(defect_ids[index])],
+                "reason": "model:two_stage_hog_svm; score is not a probability",
+            })
+        for slot in result["slots"]:
+            if slot["id"].startswith("S"):
+                slot["review_status"] = "predicted"
+        result["groups"] = {
+            "good": self.rules.summarize(
+                "good", good, good_expected_through),
+            "scrap": self.rules.summarize(
+                "scrap",
+                [slot for slot in result["slots"] if slot["id"].startswith("S")],
+                scrap_expected_through),
+        }
+        result["rule_tray_verdict"] = tray_verdict(result["groups"])
+        if self.tray_model is not None:
+            tray_features = tray_feature_vector(
+                scores, defect_ids, result["alignment"]["profile"],
+                self.tray_metadata["feature_set"])
+            mean, std = self.tray_scaler
+            scaled_tray = ((tray_features-mean)/std).reshape(
+                1, -1).astype(np.float32)
+            _, tray_prediction = self.tray_model.predict(scaled_tray)
+            _, raw_margin = self.tray_model.predict(
+                scaled_tray, flags=cv2.ml.STAT_MODEL_RAW_OUTPUT)
+            model_verdict = VERDICTS[int(tray_prediction[0, 0])]
+            complete_margin = (float(raw_margin[0, 0]) *
+                               float(self.tray_gate["complete_margin_sign"]))
+            complete_threshold = float(
+                self.tray_gate["complete_margin_threshold"])
+            result["tray_model_verdict"] = model_verdict
+            result["tray_verdict"] = confidence_gated_verdict(
+                model_verdict, complete_margin, complete_threshold)
+            result["tray_confidence_gate"] = {
+                "schema_version": self.tray_gate["schema_version"],
+                "complete_margin": round(complete_margin, 8),
+                "complete_margin_threshold": complete_threshold,
+                "accepted_complete": result["tray_verdict"] == "complete_order",
+                "low_confidence_action": "unresolved",
+                "selected_on": self.tray_gate["selected_on"],
+            }
+            result["tray_model"] = dict(self.tray_model_provenance)
+        else:
+            result["tray_verdict"] = result["rule_tray_verdict"]
+        result["backend"] = "two_stage_hog_svm_plus_scrap_appearance"
+        result["model"] = dict(self.model_provenance)
+        if self.bundle is not None:
+            result["bundle"] = {
+                "schema_version": BUNDLE_SCHEMA,
+                "manifest_sha256": self.bundle["manifest_sha256"],
+            }
+        return result, image
+
+
+def result_rows(result):
+    """Create the stable tray and position CSV rows for one result."""
+    counts = Counter(slot["class"] for slot in result["slots"])
+    summary = {
+        "filename": result["filename"],
+        "tray_verdict": result["tray_verdict"],
+        "tray_model_verdict": result.get("tray_model_verdict"),
+        "rule_tray_verdict": result["rule_tray_verdict"],
+        "complete_margin": result.get("tray_confidence_gate", {}).get(
+            "complete_margin"),
+        "complete_margin_threshold": result.get(
+            "tray_confidence_gate", {}).get("complete_margin_threshold"),
+        "route_action": result.get("service", {}).get("route_action"),
+        "good_complete_order": result["groups"]["good"]["findings"][
+            "complete_order"],
+        "good_missing_vial": result["groups"]["good"]["findings"][
+            "missing_vial"],
+        "good_bad_as_good": result["groups"]["good"]["findings"][
+            "bad_misclassified_as_good"],
+        **{f"count_{name}": counts[name] for name in CLASSES},
+    }
+    positions = [{
+        "filename": result["filename"], "slot": slot["id"],
+        "area": slot["area"], "position": slot["position"],
+        "class": slot["class"], "presence": slot["presence"],
+        "source": slot.get("prediction_source"),
+        "defect_score": slot.get("defect_score"),
+        "defect_threshold": slot.get("defect_threshold"),
+        "review_status": slot["review_status"],
+    } for slot in result["slots"]]
+    return summary, positions
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--labeler", required=True, type=Path)
@@ -302,143 +485,34 @@ def main():
     elif args.calibration is None or args.threshold_profile is None:
         parser.error("direct model mode requires calibration and threshold-profile")
 
-    profile = json.loads(args.threshold_profile.read_text())
-    if profile.get("schema_version") not in {"vial-two-stage-threshold-1",
-                                              "vial-tray-threshold-1"}:
-        parser.error("unsupported threshold profile")
-    threshold = float(profile["defect_threshold"])
-    predictor = load_predictor(args.model, threshold)
-    if predictor["kind"] != "two_stage":
-        parser.error("model must be a two-stage model directory")
-    tray_model = tray_scaler = tray_metadata = tray_gate = None
-    if args.tray_model is not None:
-        tray_metadata = json.loads((args.tray_model/"metrics.json").read_text())
-        if tray_metadata.get("schema_version") != "vial-tray-classifier-2":
-            parser.error("unsupported tray classifier")
-        tray_gate = tray_metadata.get("confidence_gate")
-        if (not isinstance(tray_gate, dict) or
-                tray_gate.get("schema_version") != "vial-tray-confidence-gate-1"):
-            parser.error("tray classifier has no supported confidence gate")
-        tray_model = cv2.ml.SVM_load(str(args.tray_model/"model.yml"))
-        with np.load(args.tray_model/"scaler.npz") as values:
-            tray_scaler = (values["mean"], values["std"])
-
-    labeler = load_module("vial_inference_labeler", args.labeler)
-    prediction_module = __import__("prediction")
-    rules = __import__("rules")
     paths = [args.images/name for name in args.files]
     for path in paths:
         if not path.is_file():
             parser.error(f"image does not exist: {path}")
     args.output.mkdir(parents=True)
-    empty_yolo = args.output/"empty_detections.txt"
-    empty_yolo.write_text("")
-    hog = cv2.HOGDescriptor((64, 64), (16, 16), (8, 8), (8, 8), 9)
     results, position_rows, summary_rows = [], [], []
 
     try:
+        engine = InspectionEngine(
+            args.labeler, args.calibration, args.model,
+            args.threshold_profile, args.tray_model, bundle)
+    except (ValueError, KeyError, OSError, json.JSONDecodeError) as exc:
+        parser.error(str(exc))
+
+    with engine:
         for path in paths:
-            prepared, _ = labeler.prepare([path], args.calibration)
-            result = prepared[0]
-            pil_image = Image.open(path).convert("RGB")
-            # Empty detections intentionally activate appearance/fill fallback only.
-            prediction_module.predict(result, pil_image, empty_yolo, auto_confirm=False)
-            pil_image.close()
-            image = cv2.imread(str(path), cv2.IMREAD_COLOR)
-            good = [slot for slot in result["slots"] if slot["id"].startswith("G")]
-            features = np.asarray([extract_feature(image, slot["bbox"], hog)
-                                   for slot in good], dtype=np.float32)
-            predicted, scores, defect_ids = predict(predictor, features)
-            for index, (slot, class_id) in enumerate(zip(good, predicted)):
-                label = CLASSES[int(class_id)]
-                slot.update({"class": label, "presence": label != "no_vial",
-                             "suggested_class": label, "review_status": "predicted",
-                             "prediction_source": "two_stage_hog_svm",
-                             "prediction_confidence": None,
-                             "defect_score": round(float(scores[index]), 8),
-                             "defect_threshold": threshold,
-                             "defect_candidate": CLASSES[int(defect_ids[index])],
-                             "reason": "model:two_stage_hog_svm; score is not a probability"})
-            for slot in result["slots"]:
-                if slot["id"].startswith("S"):
-                    slot["review_status"] = "predicted"
-            result["groups"] = {
-                "good": rules.summarize("good", good, args.good_expected_through),
-                "scrap": rules.summarize("scrap",
-                                          [slot for slot in result["slots"]
-                                           if slot["id"].startswith("S")],
-                                          args.scrap_expected_through),
-            }
-            result["rule_tray_verdict"] = tray_verdict(result["groups"])
-            if tray_model is not None:
-                tray_features = tray_feature_vector(scores, defect_ids,
-                                                    result["alignment"]["profile"],
-                                                    tray_metadata["feature_set"])
-                mean, std = tray_scaler
-                scaled_tray = ((tray_features-mean)/std).reshape(1, -1).astype(np.float32)
-                _, tray_prediction = tray_model.predict(scaled_tray)
-                _, raw_margin = tray_model.predict(
-                    scaled_tray, flags=cv2.ml.STAT_MODEL_RAW_OUTPUT)
-                model_verdict = VERDICTS[int(tray_prediction[0, 0])]
-                complete_margin = (float(raw_margin[0, 0]) *
-                                   float(tray_gate["complete_margin_sign"]))
-                complete_threshold = float(tray_gate["complete_margin_threshold"])
-                result["tray_model_verdict"] = model_verdict
-                result["tray_verdict"] = confidence_gated_verdict(
-                    model_verdict, complete_margin, complete_threshold)
-                result["tray_confidence_gate"] = {
-                    "schema_version": tray_gate["schema_version"],
-                    "complete_margin": round(complete_margin, 8),
-                    "complete_margin_threshold": complete_threshold,
-                    "accepted_complete": result["tray_verdict"] == "complete_order",
-                    "low_confidence_action": "unresolved",
-                    "selected_on": tray_gate["selected_on"],
-                }
-                result["tray_model"] = {
-                    "feature_set": tray_metadata["feature_set"],
-                    "model_sha256": sha256(args.tray_model/"model.yml"),
-                    "scaler_sha256": sha256(args.tray_model/"scaler.npz"),
-                }
-            else:
-                result["tray_verdict"] = result["rule_tray_verdict"]
-            result["backend"] = "two_stage_hog_svm_plus_scrap_appearance"
-            result["model"] = {"directory": str(args.model.resolve()),
-                               "stage1_sha256": sha256(args.model/"stage1.yml"),
-                               "stage2_sha256": sha256(args.model/"stage2.yml"),
-                               "threshold_profile_sha256": sha256(args.threshold_profile),
-                               "defect_threshold": threshold}
-            if bundle is not None:
-                result["bundle"] = {
-                    "schema_version": BUNDLE_SCHEMA,
-                    "manifest_sha256": bundle["manifest_sha256"],
-                }
+            result, image = engine.inspect(
+                path, args.good_expected_through, args.scrap_expected_through)
             if not args.no_visual_report:
                 relative_annotation = Path("annotated")/path.name
                 render_annotated(image, result, args.output/relative_annotation)
                 result["annotated_image"] = relative_annotation.as_posix()
             results.append(result)
-            counts = Counter(slot["class"] for slot in result["slots"])
-            summary_rows.append({"filename": path.name, "tray_verdict": result["tray_verdict"],
-                                 "tray_model_verdict": result.get("tray_model_verdict"),
-                                 "rule_tray_verdict": result["rule_tray_verdict"],
-                                 "complete_margin": result.get("tray_confidence_gate", {}).get("complete_margin"),
-                                 "complete_margin_threshold": result.get("tray_confidence_gate", {}).get("complete_margin_threshold"),
-                                 "good_complete_order": result["groups"]["good"]["findings"]["complete_order"],
-                                 "good_missing_vial": result["groups"]["good"]["findings"]["missing_vial"],
-                                 "good_bad_as_good": result["groups"]["good"]["findings"]["bad_misclassified_as_good"],
-                                 **{f"count_{name}": counts[name] for name in CLASSES}})
-            for slot in result["slots"]:
-                position_rows.append({"filename": path.name, "slot": slot["id"],
-                                      "area": slot["area"], "position": slot["position"],
-                                      "class": slot["class"], "presence": slot["presence"],
-                                      "source": slot.get("prediction_source"),
-                                      "defect_score": slot.get("defect_score"),
-                                      "defect_threshold": slot.get("defect_threshold"),
-                                      "review_status": slot["review_status"]})
+            summary, positions = result_rows(result)
+            summary_rows.append(summary)
+            position_rows.extend(positions)
             print(f"INFERRED {path.name} verdict={result['tray_verdict']} "
                   f"good_defects={len(result['groups']['good']['visible_defect_positions'])}")
-    finally:
-        empty_yolo.unlink(missing_ok=True)
 
     payload = {"schema_version": "vial-inference-1",
                "warning": "Predictions are model/appearance outputs, not human review.",

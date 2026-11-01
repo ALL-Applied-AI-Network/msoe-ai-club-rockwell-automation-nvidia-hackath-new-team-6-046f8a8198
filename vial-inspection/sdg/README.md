@@ -156,6 +156,30 @@ For development, the original `--model`, `--tray-model`, `--calibration`, and
 `--threshold-profile` arguments remain available. Use `--bundle` for demos and
 deployment so configuration and weights cannot be accidentally mixed.
 
+## Run the persistent inspection service
+
+`inspection_service.py` loads the verified bundle once and watches a directory
+for new JPEG images. It is the filesystem boundary for a camera or Omniverse
+writer:
+
+```bash
+python inspection_service.py \
+  --labeler ../vial-labeler-participants-20261014/vial-labeler-participants-v1/labeler.py \
+  --bundle output/deployment-bundle-v1 \
+  --input output/incoming \
+  --output output/live-inspection \
+  --poll-seconds 1
+```
+
+Each unique filename/SHA-256 pair is inspected once. Result directories are
+committed atomically, and restarts reuse `state.json` instead of rerunning the
+model. `latest.json` is an atomic machine-facing handoff with the explicit
+route action: `accept` for `complete_order`, `reject` for `incomplete_order`,
+and `hold` for `unresolved`. `health.json`, aggregate JSON/CSVs, annotated
+images, and `report.html` are refreshed after successful inspections. Failed
+images are isolated under `errors/` without stopping the watcher. Use `--once`
+to process the current queue and exit.
+
 Because a tray fails when any of 30 good positions is defective, calibrate a
 separate tray threshold against Validation-level `complete_order` and
 `incomplete_order` labels to audit whether score aggregation is viable:
