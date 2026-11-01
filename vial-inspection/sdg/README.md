@@ -86,3 +86,19 @@ python train_baseline.py \
 This baseline is an early data/pipeline diagnostic. The intended production
 model remains a transfer-learned image classifier evaluated against real,
 held-out inspection images.
+
+## Check the real-image domain gap
+
+`evaluate_real.py` applies the synthetic-trained model to calibrated crops from
+the four supplied real-image regimes and records agreement by image, class, and
+position. These annotations are machine-generated pseudo-labels, so agreement
+is a consistency diagnostic rather than ground-truth accuracy:
+
+```bash
+python evaluate_real.py \
+  --model output/baseline-v1/model.yml \
+  --annotations ../reference_annotations \
+  --images ../labeler_extensions/calibration/examples \
+  --output output/real-agreement-v1.json \
+  --areas good
+```
