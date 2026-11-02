@@ -72,6 +72,7 @@ __pycache__/
 tmp/
 .deck-build/
 deck/
+project_artifacts/
 portfolio-site/
 vial-inspection/**/review-*/
 vial-inspection/**/calibration-check/
